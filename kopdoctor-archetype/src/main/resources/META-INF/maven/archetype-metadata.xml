@@ -14,6 +14,10 @@
         </requiredProperty>
     </requiredProperties>
 
+    <modules>
+        <module id="${artifactId}" dir="xxx" name="controller"/>
+    </modules>
+
     <fileSets>
         <fileSet filtered="true" packaged="true" encoding="utf-8">
             <directory>src/main/java</directory>
