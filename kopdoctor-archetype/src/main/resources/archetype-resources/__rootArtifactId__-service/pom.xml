@@ -4,18 +4,18 @@
 
     <parent>
         <groupId>${groupId}</groupId>
-        <artifactId>${artifactId}</artifactId>
+        <artifactId>${rootArtifactId}</artifactId>
         <version>${version}</version>
     </parent>
 
-    <artifactId>${artifactId}-service</artifactId>
+    <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>${artifactId}-domain</artifactId>
+            <artifactId>${rootArtifactId}-domain</artifactId>
         </dependency>
     </dependencies>
 </project>
