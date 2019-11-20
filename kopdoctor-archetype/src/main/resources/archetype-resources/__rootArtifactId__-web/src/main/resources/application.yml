@@ -1,9 +1,9 @@
 spring:
   application:
-    name: ${rootArtifactId}${kopdoctor-developer-name}
+    name: ${rootArtifactId}${KOPDOCTOR_DEVELOPER_NAME}
   cloud:
     consul:
-      host: ${kopdoctor-registry-address}
+      host: ${KOPDOCTOR_REGISTRY_ADDRESS}
       port: 8500
       discovery:
         service-name: ${rootArtifactId}

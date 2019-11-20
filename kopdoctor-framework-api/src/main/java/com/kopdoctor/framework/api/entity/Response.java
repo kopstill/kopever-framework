@@ -39,9 +39,4 @@ public class Response<T> {
         return Response.<T>builder().build().head(ResponseHead.builder().build().code(code).message(message)).body(body);
     }
 
-    public static void main(String[] args) {
-        ResponseHead responseHead = new ResponseHead("", "", "", 1111L, 111L, "");
-        System.out.println(responseHead);
-    }
-
 }
