@@ -10,16 +10,5 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kopdoctor-framework-api</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>kopdoctor-framework-core</artifactId>
 </project>

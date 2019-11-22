@@ -6,13 +6,8 @@
 
     <groupId>com.kopdoctor</groupId>
     <artifactId>kopdoctor-framework</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>kopdoctor-parent</module>
-        <module>kopdoctor-framework-api</module>
-    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -24,5 +19,73 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <kopdoctor-framework.version>0.0.1-SNAPSHOT</kopdoctor-framework.version>
+        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
+
+    <modules>
+        <module>kopdoctor-framework-web</module>
+        <module>kopdoctor-framework-cloud</module>
+        <module>kopdoctor-framework-api</module>
+        <module>kopdoctor-framework-core</module>
+        <module>kopdoctor-framework-common</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-web</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-cloud</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-api</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-core</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-common</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.10</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

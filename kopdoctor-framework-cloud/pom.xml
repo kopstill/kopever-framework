@@ -7,13 +7,15 @@
     <parent>
         <groupId>com.kopdoctor</groupId>
         <artifactId>kopdoctor-framework</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kopdoctor-parent</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>kopdoctor-framework-cloud</artifactId>
 
-    <modules>
-        <module>kopdoctor-parent-web</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+    </dependencies>
 </project>
