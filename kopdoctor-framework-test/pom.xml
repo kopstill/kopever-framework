@@ -10,21 +10,21 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kopdoctor-framework-common</artifactId>
+    <artifactId>kopdoctor-framework-test</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.kopdoctor</groupId>
+            <artifactId>kopdoctor-framework-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kopdoctor</groupId>
+            <artifactId>kopdoctor-framework-common</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -31,6 +31,7 @@
         <module>kopdoctor-framework-api</module>
         <module>kopdoctor-framework-core</module>
         <module>kopdoctor-framework-common</module>
+        <module>kopdoctor-framework-test</module>
     </modules>
 
     <dependencyManagement>
