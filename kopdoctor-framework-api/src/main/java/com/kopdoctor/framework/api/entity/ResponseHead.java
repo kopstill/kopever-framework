@@ -32,11 +32,11 @@ public class ResponseHead {
     private String encoding;
 
     public static ResponseHead success() {
-        return ResponseHead.builder().build().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).timestamp(System.currentTimeMillis());
+        return ResponseHead.builder().build().setCode(SUCCESS_CODE).setMessage(SUCCESS_MESSAGE).setTimestamp(System.currentTimeMillis());
     }
 
     public static ResponseHead failure() {
-        return ResponseHead.builder().build().code(FAILURE_CODE).message(FAILURE_MESSAGE).timestamp(System.currentTimeMillis());
+        return ResponseHead.builder().build().setCode(FAILURE_CODE).setMessage(FAILURE_MESSAGE).setTimestamp(System.currentTimeMillis());
     }
 
     public boolean isSuccess() {
