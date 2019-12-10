@@ -31,12 +31,28 @@ public class ResponseHead {
 
     private String encoding;
 
-    public static ResponseHead success() {
-        return ResponseHead.builder().build().setCode(SUCCESS_CODE).setMessage(SUCCESS_MESSAGE).setTimestamp(System.currentTimeMillis());
+    public ResponseHead success() {
+        return this.success(SUCCESS_MESSAGE);
     }
 
-    public static ResponseHead failure() {
-        return ResponseHead.builder().build().setCode(FAILURE_CODE).setMessage(FAILURE_MESSAGE).setTimestamp(System.currentTimeMillis());
+    public ResponseHead success(String message) {
+        return this.success(SUCCESS_CODE, message);
+    }
+
+    public ResponseHead success(String code, String message) {
+        return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(System.currentTimeMillis());
+    }
+
+    public ResponseHead failure() {
+        return this.failure(FAILURE_MESSAGE);
+    }
+
+    public ResponseHead failure(String message) {
+        return this.failure(FAILURE_CODE, message);
+    }
+
+    public ResponseHead failure(String code, String message) {
+        return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(System.currentTimeMillis());
     }
 
     public boolean isSuccess() {

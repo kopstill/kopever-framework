@@ -1,8 +1,8 @@
 package com.kopdoctor.framework.test.api;
 
 import com.kopdoctor.framework.api.entity.Response;
-import com.kopdoctor.framework.api.entity.ResponseHead;
 import com.kopdoctor.framework.common.json.Jackson;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
@@ -10,19 +10,41 @@ import java.util.Date;
 public class ResponseEntityTest {
 
     @Test
-    public void testJackson() {
-        Response<Long> response = Response.success("hello");
-        System.out.println(Jackson.toJson(response));
-
-        ResponseHead head = ResponseHead.builder().code("0").message("message").encoding("encoding").requestId("requestId").taketime(123L).timestamp(321L).build();
-        System.out.println(Jackson.toJson(head));
-
+    public void testResponse() {
         TempEntity tempEntity = new TempEntity();
         tempEntity.setId(123L).setName("name").setTime(new Date());
-        System.out.println(Jackson.toJson(tempEntity));
 
-        Response<TempEntity> response1 = Response.success(tempEntity);
-        System.out.println(Jackson.toJson(response1));
+        Response<Void> defaultResponse = Response.success();
+        System.out.println(Jackson.toJson(defaultResponse));
+
+        Response<Void> messageResponse = Response.successMessage("success message");
+        System.out.println(Jackson.toJson(messageResponse));
+
+        Response<String> stringResponse = Response.success("hello");
+        System.out.println(Jackson.toJson(stringResponse));
+
+        Response<TempEntity> entityResponse = Response.success(tempEntity);
+        System.out.println(Jackson.toJson(entityResponse));
+
+        Response<TempEntity> messageEntityResponse = Response.success("Okay", tempEntity);
+        System.out.println(Jackson.toJson(messageEntityResponse));
+
+        Assert.assertTrue(Boolean.TRUE);
+
+        Response<Void> defaultErrorResponse = Response.error();
+        System.out.println(Jackson.toJson(defaultErrorResponse));
+
+        Response<Void> messageErrorResponse = Response.errorMessage("failure message");
+        System.out.println(Jackson.toJson(messageErrorResponse));
+
+        Response<TempEntity> entityErrorResponse = Response.error(tempEntity);
+        System.out.println(Jackson.toJson(entityErrorResponse));
+
+        Response<Void> codeMessageErrorResponse = Response.error("-12138", "error message");
+        System.out.println(Jackson.toJson(codeMessageErrorResponse));
+
+        Response<TempEntity> codeMessageEntityErrorResponse = Response.error("-12138", "failed", tempEntity);
+        System.out.println(Jackson.toJson(codeMessageEntityErrorResponse));
     }
 
 }

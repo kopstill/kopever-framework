@@ -15,28 +15,40 @@ public class Response<T> {
 
     private T body;
 
-    public static <T> Response<T> success(String message) {
-        return Response.<T>builder().build().setHead(ResponseHead.builder().build().setMessage(message));
+    public static Response<Void> successMessage(String message) {
+        return Response.<Void>builder().build().setHead(ResponseHead.builder().build().success(message));
+    }
+
+    public static Response<Void> success() {
+        return Response.<Void>builder().build().setHead(ResponseHead.builder().build().success());
     }
 
     public static <T> Response<T> success(T body) {
-        return Response.<T>builder().build().setHead(ResponseHead.builder().build()).setBody(body);
+        return Response.<T>builder().build().setHead(ResponseHead.builder().build().success()).setBody(body);
     }
 
     public static <T> Response<T> success(String message, T body) {
-        return Response.<T>builder().build().setHead(ResponseHead.builder().build().setMessage(message)).setBody(body);
+        return Response.<T>builder().build().setHead(ResponseHead.builder().build().success(message)).setBody(body);
     }
 
-    public static <T> Response<T> error() {
-        return Response.<T>builder().build().setHead(ResponseHead.failure());
+    public static Response<Void> errorMessage(String message) {
+        return Response.<Void>builder().build().setHead(ResponseHead.builder().build().failure(message));
     }
 
-    public static <T> Response<T> error(String code, String message) {
-        return Response.<T>builder().build().setHead(ResponseHead.builder().build().setCode(code).setMessage(message));
+    public static Response<Void> error() {
+        return Response.<Void>builder().build().setHead(ResponseHead.builder().build().failure());
+    }
+
+    public static <T> Response<T> error(T body) {
+        return Response.<T>builder().build().setHead(ResponseHead.builder().build().failure()).setBody(body);
+    }
+
+    public static Response<Void> error(String code, String message) {
+        return Response.<Void>builder().build().setHead(ResponseHead.builder().build().failure(code, message));
     }
 
     public static <T> Response<T> error(String code, String message, T body) {
-        return Response.<T>builder().build().setHead(ResponseHead.builder().build().setCode(code).setMessage(message)).setBody(body);
+        return Response.<T>builder().build().setHead(ResponseHead.builder().build().failure(code, message)).setBody(body);
     }
 
 }
