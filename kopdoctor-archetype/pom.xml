@@ -4,11 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kopdoctor</groupId>
-    <artifactId>kopdoctor-archetype</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>maven-archetype</packaging>
+    <parent>
+        <groupId>com.kopdoctor</groupId>
+        <artifactId>kopdoctor-framework</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
+    <artifactId>kopdoctor-archetype</artifactId>
+    <packaging>maven-archetype</packaging>
     <description>kopdoctor-archetype</description>
 
     <build>
@@ -16,21 +19,16 @@
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
                 <artifactId>archetype-packaging</artifactId>
-                <version>3.1.2</version>
             </extension>
         </extensions>
 
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
-                    <version>3.1.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                         <addDefaultExcludes>false</addDefaultExcludes>
