@@ -13,11 +13,11 @@ public class ResponseHead {
 
     private static final String SUCCESS_CODE = "0";
 
-    private static final String SUCCESS_MESSAGE = "Success";
+    private static final String SUCCESS_MESSAGE = "success";
 
     private static final String FAILURE_CODE = "-1";
 
-    private static final String FAILURE_MESSAGE = "Failure";
+    private static final String FAILURE_MESSAGE = "failure";
 
     private String requestId;
 
@@ -36,11 +36,7 @@ public class ResponseHead {
     }
 
     public ResponseHead success(String message) {
-        return this.success(SUCCESS_CODE, message);
-    }
-
-    public ResponseHead success(String code, String message) {
-        return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(System.currentTimeMillis());
+        return ResponseHead.builder().build().setCode(SUCCESS_CODE).setMessage(message).setTimestamp(System.currentTimeMillis());
     }
 
     public ResponseHead failure() {

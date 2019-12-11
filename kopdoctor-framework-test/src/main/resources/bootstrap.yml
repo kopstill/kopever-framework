@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: ${KOPDOCTOR_CONFIG_ENV}
+  application:
+    name: kopdoctor-test${KOPDOCTOR_DEVELOPER_NAME:}
+  cloud:
+    consul:
+      host: ${KOPDOCTOR_REGISTRY_ADDRESS}
+      port: 8500
+      discovery:
+        service-name: kopdoctor-test
+      config:
+        enabled: true
+        prefix: config
+        format: properties

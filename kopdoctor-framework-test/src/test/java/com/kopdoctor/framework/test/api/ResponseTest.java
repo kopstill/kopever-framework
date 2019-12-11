@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-public class ResponseEntityTest {
+public class ResponseTest {
 
     @Test
     public void testResponse() {
@@ -16,6 +16,7 @@ public class ResponseEntityTest {
 
         Response<Void> defaultResponse = Response.success();
         System.out.println(Jackson.toJson(defaultResponse));
+        Assert.assertTrue(defaultResponse.getHead().isSuccess());
 
         Response<Void> messageResponse = Response.successMessage("success message");
         System.out.println(Jackson.toJson(messageResponse));
@@ -28,8 +29,6 @@ public class ResponseEntityTest {
 
         Response<TempEntity> messageEntityResponse = Response.success("Okay", tempEntity);
         System.out.println(Jackson.toJson(messageEntityResponse));
-
-        Assert.assertTrue(Boolean.TRUE);
 
         Response<Void> defaultErrorResponse = Response.error();
         System.out.println(Jackson.toJson(defaultErrorResponse));
