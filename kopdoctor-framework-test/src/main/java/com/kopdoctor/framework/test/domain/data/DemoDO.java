@@ -1,4 +1,4 @@
-package com.kopdoctor.framework.test.domain;
+package com.kopdoctor.framework.test.domain.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class TestDO {
+public class DemoDO {
 
     private Long id;
 
