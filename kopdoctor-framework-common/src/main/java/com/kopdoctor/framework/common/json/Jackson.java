@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -15,20 +16,30 @@ public class Jackson {
 
     private static ObjectMapper objectMapper;
 
+    private static ObjectMapper snakeMapper;
+
     static {
         objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        snakeMapper = new ObjectMapper();
+        snakeMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {
-        return fromJsonViaJavaType(json, objectMapper.constructType(clazz));
+        return fromJsonViaJavaType(json, objectMapper.constructType(clazz), false);
     }
 
-    private static <T> T fromJsonViaJavaType(String json, JavaType javaType) {
+    public static <T> T fromJsonSnakeCase(String json, Class<T> clazz) {
+        return fromJsonViaJavaType(json, objectMapper.constructType(clazz), true);
+    }
+
+    private static <T> T fromJsonViaJavaType(String json, JavaType javaType, boolean isSnakeCase) {
         try {
-            return objectMapper.readValue(json, javaType);
+            return isSnakeCase ? snakeMapper.readValue(json, javaType) : objectMapper.readValue(json, javaType);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Jackson deserialization exception", e);
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -37,18 +48,26 @@ public class Jackson {
     }
 
     public static <K, V> Map<K, V> jsonToMap(String json, Class<K> keyClass, Class<V> valueClass) {
-        return fromJsonViaJavaType(json, objectMapper.getTypeFactory().constructMapType(Map.class, keyClass, valueClass));
+        return fromJsonViaJavaType(json, objectMapper.getTypeFactory().constructMapType(Map.class, keyClass, valueClass), false);
     }
 
     public static <T> List<T> jsonToList(String json, Class<T> elementClass) {
-        return fromJsonViaJavaType(json, objectMapper.getTypeFactory().constructCollectionType(List.class, elementClass));
+        return fromJsonViaJavaType(json, objectMapper.getTypeFactory().constructCollectionType(List.class, elementClass), false);
     }
 
     public static String toJson(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Jackson serialization exception", e);
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static String toJsonSnakeCase(Object object) {
+        try {
+            return snakeMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -56,7 +75,15 @@ public class Jackson {
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Jackson serialization exception", e);
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static String toPrettyJsonSnakeCase(Object object) {
+        try {
+            return snakeMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 

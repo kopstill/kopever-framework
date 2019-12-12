@@ -37,4 +37,21 @@ public class JacksonTest {
         System.out.println(Jackson.jsonToList("[\"hello\",\"world\",12138]", String.class));
     }
 
+    @Test
+    public void testJacksonSnakeCase() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(12138L);
+        userDTO.setUserType(1);
+        userDTO.setUserStatus(3);
+        userDTO.setCreateTime(new Date());
+        System.out.println(Jackson.toJsonSnakeCase(userDTO));
+        System.out.println(Jackson.toPrettyJsonSnakeCase(userDTO));
+
+        Assert.assertTrue(true);
+
+        String json = "{\"id\":12138,\"username\":null,\"nickname\":null,\"user_type\":1,\"user_status\":3,\"channel\":null,\"create_time\":\"2019-12-12 17:47:51\"}";
+        System.out.println(Jackson.fromJsonSnakeCase(json, UserDTO.class).getUserType());
+        System.out.println(Jackson.fromJsonSnakeCase(json, UserDTO.class).getUserStatus());
+    }
+
 }
