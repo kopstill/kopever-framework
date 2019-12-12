@@ -28,6 +28,13 @@ public class JacksonTest {
         System.out.println(Jackson.toJson(userMap));
 
         Assert.assertTrue(true);
+
+        System.out.println(Jackson.jsonToMap(json));
+        System.out.println(Jackson.jsonToMap(json, String.class, String.class));
+
+        System.out.println(Jackson.toPrettyJson(userDTO));
+
+        System.out.println(Jackson.jsonToList("[\"hello\",\"world\",12138]", String.class));
     }
 
 }
