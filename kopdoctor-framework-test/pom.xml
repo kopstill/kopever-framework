@@ -15,6 +15,10 @@
     <dependencies>
         <dependency>
             <groupId>com.kopdoctor</groupId>
+            <artifactId>kopdoctor-framework-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kopdoctor</groupId>
             <artifactId>kopdoctor-framework-api</artifactId>
         </dependency>
         <dependency>

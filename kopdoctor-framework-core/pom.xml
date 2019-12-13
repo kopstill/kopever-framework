@@ -11,4 +11,11 @@
     </parent>
 
     <artifactId>kopdoctor-framework-core</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>

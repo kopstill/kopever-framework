@@ -1,12 +1,14 @@
 package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
+import com.kopdoctor.framework.core.validation.ValidationGroup;
 import com.kopdoctor.framework.test.config.properties.DemoProperties;
 import com.kopdoctor.framework.test.domain.dto.DemoDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -28,7 +30,7 @@ public class DemoController {
     }
 
     @GetMapping("/demo/config/single")
-    public Response<String> configTest() {
+    public Response<String> testConfigSingle() {
         return Response.success(demoName);
     }
 
@@ -48,22 +50,12 @@ public class DemoController {
     }
 
     @PostMapping("/demo")
-    public Response<DemoDTO> postDemo() {
-        DemoDTO demoDTO = new DemoDTO();
-        demoDTO.setId(2L);
-        demoDTO.setDemoName("post request");
-        demoDTO.setCreateTime(new Date());
-
+    public Response<DemoDTO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoDTO demoDTO) {
         return Response.success(demoDTO);
     }
 
     @PutMapping("/demo")
-    public Response<DemoDTO> putDemo() {
-        DemoDTO demoDTO = new DemoDTO();
-        demoDTO.setId(3L);
-        demoDTO.setDemoName("put request");
-        demoDTO.setCreateTime(new Date());
-
+    public Response<DemoDTO> putDemo(@RequestBody @Validated(ValidationGroup.Update.class) DemoDTO demoDTO) {
         return Response.success(demoDTO);
     }
 
