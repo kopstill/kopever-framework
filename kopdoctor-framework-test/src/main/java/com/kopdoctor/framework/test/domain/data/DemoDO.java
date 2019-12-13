@@ -1,6 +1,5 @@
 package com.kopdoctor.framework.test.domain.data;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,9 +11,20 @@ public class DemoDO {
 
     private Long id;
 
-    private String name;
+    private String demoName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private String demoContent;
+
+    private Short demoType;
+
+    private Byte demoStatus;
+
+    private String remark;
+
+    private Boolean isDeleted;
+
     private Date createTime;
+
+    private Date updateTime;
 
 }

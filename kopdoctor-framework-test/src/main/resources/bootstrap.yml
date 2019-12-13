@@ -1,15 +1,13 @@
 spring:
   profiles:
-    active: ${KOPDOCTOR_CONFIG_ENV}
+    active: ${KOPDOCTOR_CONFIG_ENV:dev}
   application:
     name: kopdoctor-demo${KOPDOCTOR_DEVELOPER_NAME:}
   cloud:
     consul:
-      host: ${KOPDOCTOR_REGISTRY_ADDRESS}
+      host: ${KOPDOCTOR_REGISTRY_ADDRESS:127.0.0.1}
       port: 8500
       discovery:
         service-name: kopdoctor-demo
       config:
-        enabled: true
-        prefix: config
         format: yaml
