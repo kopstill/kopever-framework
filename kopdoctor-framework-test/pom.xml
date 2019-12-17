@@ -26,6 +26,10 @@
             <artifactId>kopdoctor-framework-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.kopdoctor</groupId>
+            <artifactId>kopdoctor-framework-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
