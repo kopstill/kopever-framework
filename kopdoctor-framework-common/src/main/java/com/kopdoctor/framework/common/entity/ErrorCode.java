@@ -8,9 +8,12 @@ public enum ErrorCode {
     SUCCESS("0", "success"),
     FAILURE("-1", "failure"),
     SYSTEM_EXCEPTION("1", "system exception"),
-    INTERNAL_EXCEPTION("2", "internal exception"),
-    EXTERNAL_EXCEPTION("3", "external exception"),
-    REMOTE_EXCEPTION("4", "remote exception"),
+    SYSTEM_RUNTIME_EXCEPTION("2", "system runtime exception"),
+    INTERNAL_EXCEPTION("3", "internal exception"),
+    EXTERNAL_EXCEPTION("4", "external exception"),
+    REMOTE_EXCEPTION("5", "remote exception"),
+    REQUEST_EXCEPTION("6", "request exception"),
+    RESPONSE_EXCEPTION("7", "response exception"),
     ;
 
     ErrorCode(String code, String message) {

@@ -26,9 +26,6 @@ public class DemoController {
 
     @GetMapping
     public Response<Void> root() {
-        if ("1".equals("1")) {
-            throw new RuntimeException();
-        }
         return Response.success();
     }
 
