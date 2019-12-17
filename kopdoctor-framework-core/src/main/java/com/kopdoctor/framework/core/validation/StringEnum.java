@@ -7,12 +7,12 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = IntEnumValidator.class)
-public @interface IntEnum {
+@Constraint(validatedBy = StringEnumValidator.class)
+public @interface StringEnum {
 
-    int[] enums();
+    String[] enums();
 
-    String message() default "Int枚举超出范围值";
+    String message() default "String枚举超出范围值";
 
     Class<?>[] groups() default {};
 

@@ -2,6 +2,7 @@ package com.kopdoctor.framework.core.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,16 +12,14 @@ public class IntEnumValidator implements ConstraintValidator<IntEnum, Integer> {
 
     @Override
     public void initialize(IntEnum constraintAnnotation) {
-        this.enums = new HashSet<>();
-        int[] params = constraintAnnotation.enums();
-        for (int param : params) {
-            this.enums.add(params[param]);
-        }
+        int[] declaredEnums = constraintAnnotation.enums();
+        enums = new HashSet<>(declaredEnums.length);
+        Arrays.stream(declaredEnums).forEach(enums::add);
     }
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
-        return enums == null || this.enums.contains(value);
+        return enums == null || enums.contains(value);
     }
 
 }
