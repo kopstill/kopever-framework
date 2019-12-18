@@ -12,7 +12,7 @@ public @interface IntEnum {
 
     int[] enums();
 
-    String message() default "Int枚举超出范围值";
+    String message() default "枚举数字超出范围值";
 
     Class<?>[] groups() default {};
 

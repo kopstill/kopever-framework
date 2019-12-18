@@ -12,7 +12,7 @@ public @interface StringEnum {
 
     String[] enums();
 
-    String message() default "String枚举超出范围值";
+    String message() default "枚举字符超出范围值";
 
     Class<?>[] groups() default {};
 

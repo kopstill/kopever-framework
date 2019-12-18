@@ -1,6 +1,7 @@
 package com.kopdoctor.framework.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.kopdoctor.framework.common.entity.IRestCode;
 import com.kopdoctor.framework.common.entity.RestCode;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,14 +12,6 @@ import lombok.Setter;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseHead {
-
-    private static final String SUCCESS_CODE = "0";
-
-    private static final String SUCCESS_MESSAGE = "success";
-
-    private static final String FAILURE_CODE = "-1";
-
-    private static final String FAILURE_MESSAGE = "failure";
 
     private String requestId;
 
@@ -32,32 +25,32 @@ public class ResponseHead {
 
     private String encoding;
 
-    public ResponseHead success() {
-        return this.success(SUCCESS_MESSAGE);
+    public static ResponseHead success() {
+        return success(RestCode.SUCCESS.getMessage());
     }
 
-    public ResponseHead success(String message) {
-        return ResponseHead.builder().build().setCode(SUCCESS_CODE).setMessage(message).setTimestamp(System.currentTimeMillis());
+    public static ResponseHead success(String message) {
+        return ResponseHead.builder().build().setCode(RestCode.SUCCESS.getCode()).setMessage(message).setTimestamp(System.currentTimeMillis());
     }
 
-    public ResponseHead failure() {
-        return this.failure(FAILURE_MESSAGE);
+    public static ResponseHead failure() {
+        return failure(RestCode.FAILURE);
     }
 
-    public ResponseHead failure(RestCode restCode) {
-        return this.failure(restCode.getCode(), restCode.getMessage());
+    public static ResponseHead failure(IRestCode restCode) {
+        return failure(restCode.getCode(), restCode.getMessage());
     }
 
-    public ResponseHead failure(String message) {
-        return this.failure(FAILURE_CODE, message);
+    public static ResponseHead failure(String message) {
+        return failure(RestCode.FAILURE.getCode(), message);
     }
 
-    public ResponseHead failure(String code, String message) {
+    public static ResponseHead failure(String code, String message) {
         return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(System.currentTimeMillis());
     }
 
     public boolean isSuccess() {
-        return SUCCESS_CODE.equals(code);
+        return RestCode.SUCCESS.getCode().equals(code);
     }
 
     public boolean isError() {

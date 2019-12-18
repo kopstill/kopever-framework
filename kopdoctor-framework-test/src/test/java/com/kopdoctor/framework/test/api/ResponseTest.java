@@ -44,6 +44,15 @@ public class ResponseTest {
 
         Response<TempEntity> codeMessageEntityErrorResponse = Response.error("-12138", "failed", tempEntity);
         System.out.println(Jackson.toJson(codeMessageEntityErrorResponse));
+
+        Response<Void> errorCodeResponse = Response.errorCode("-9527");
+        System.out.println(Jackson.toJson(errorCodeResponse));
+
+        Response<TempEntity> errorCodeEntityResponse = Response.errorCode("-9527", tempEntity);
+        System.out.println(Jackson.toJson(errorCodeEntityResponse));
+
+        Response<TempEntity> errorMessageEntityResponse = Response.errorMessage("error entity message", tempEntity);
+        System.out.println(Jackson.toJson(errorMessageEntityResponse));
     }
 
 }

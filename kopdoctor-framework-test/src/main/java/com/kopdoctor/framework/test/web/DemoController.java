@@ -2,6 +2,7 @@ package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
+import com.kopdoctor.framework.test.common.BusinessCode;
 import com.kopdoctor.framework.test.config.properties.DemoProperties;
 import com.kopdoctor.framework.test.domain.dto.DemoDTO;
 import lombok.NonNull;
@@ -46,17 +47,17 @@ public class DemoController {
         demoDTO.setDemoName("get request");
         demoDTO.setCreateTime(new Date());
 
-        return Response.success(demoDTO);
+        return Response.success(BusinessCode.QUERY_SUCCESS, demoDTO);
     }
 
     @PostMapping("/demo")
     public Response<DemoDTO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoDTO demoDTO) {
-        return Response.success(demoDTO);
+        return Response.success(BusinessCode.SAVE_SUCCESS, demoDTO);
     }
 
     @PutMapping("/demo")
     public Response<DemoDTO> putDemo(@RequestBody @Validated(ValidationGroup.Update.class) DemoDTO demoDTO) {
-        return Response.success(demoDTO);
+        return Response.success(BusinessCode.UPDATE_SUCCESS, demoDTO);
     }
 
     @DeleteMapping("/demo")
@@ -66,7 +67,7 @@ public class DemoController {
         demoDTO.setDemoName("delete request");
         demoDTO.setCreateTime(new Date());
 
-        return Response.success(demoDTO);
+        return Response.success(BusinessCode.DELETE_SUCCESS, demoDTO);
     }
 
 }
