@@ -1,7 +1,7 @@
 package com.kopdoctor.framework.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kopdoctor.framework.common.entity.ErrorCode;
+import com.kopdoctor.framework.common.entity.RestCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,8 +44,8 @@ public class ResponseHead {
         return this.failure(FAILURE_MESSAGE);
     }
 
-    public ResponseHead failure(ErrorCode errorCode) {
-        return this.failure(errorCode.getCode(), errorCode.getMessage());
+    public ResponseHead failure(RestCode restCode) {
+        return this.failure(restCode.getCode(), restCode.getMessage());
     }
 
     public ResponseHead failure(String message) {

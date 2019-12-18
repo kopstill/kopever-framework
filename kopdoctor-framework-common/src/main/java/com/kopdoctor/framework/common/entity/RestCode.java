@@ -3,7 +3,7 @@ package com.kopdoctor.framework.common.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-public enum ErrorCode {
+public enum RestCode {
 
     SUCCESS("0", "success"),
     FAILURE("-1", "failure"),
@@ -16,7 +16,7 @@ public enum ErrorCode {
     RESPONSE_EXCEPTION("7", "response exception"),
     ;
 
-    ErrorCode(String code, String message) {
+    RestCode(String code, String message) {
         this.code = code;
         this.message = message;
     }

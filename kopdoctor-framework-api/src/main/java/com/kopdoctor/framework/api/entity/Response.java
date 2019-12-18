@@ -1,7 +1,7 @@
 package com.kopdoctor.framework.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kopdoctor.framework.common.entity.ErrorCode;
+import com.kopdoctor.framework.common.entity.RestCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,8 +40,8 @@ public class Response<T> {
         return Response.<Void>builder().build().setHead(ResponseHead.builder().build().failure());
     }
 
-    public static Response<ErrorCode> error(ErrorCode errorCode) {
-        return Response.<ErrorCode>builder().build().setHead(ResponseHead.builder().build().failure(errorCode));
+    public static Response<RestCode> error(RestCode restCode) {
+        return Response.<RestCode>builder().build().setHead(ResponseHead.builder().build().failure(restCode));
     }
 
     public static <T> Response<T> error(T body) {
