@@ -7,10 +7,7 @@ import lombok.Setter;
 @Getter
 public enum BusinessCode implements IRestCode {
 
-    QUERY_SUCCESS("0", "查询成功"),
-    SAVE_SUCCESS("0", "保存成功"),
-    UPDATE_SUCCESS("0", "更新成功"),
-    DELETE_SUCCESS("0", "删除成功"),
+    DEMO_NOT_FOUND("10001", "示例未找到"),
     ;
 
     BusinessCode(String code, String message) {

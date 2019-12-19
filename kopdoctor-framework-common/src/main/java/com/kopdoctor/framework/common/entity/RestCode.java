@@ -9,8 +9,23 @@ public enum RestCode implements IRestCode {
     FAILURE("-1", "failure"),
     SYSTEM_EXCEPTION("1", "system exception"),
     SYSTEM_RUNTIME_EXCEPTION("2", "system runtime exception"),
-    REQUEST_PARAMS_EXCEPTION("3", "request params exception"),
-    REQUEST_INVALID_EXCEPTION("4", "request invalid exception"),
+    RESOURCE_NOT_FOUND("3", "resource not found"),
+    INTERNAL_SERVER_ERROR("4", "internal server error"),
+    INVALID_REQUEST("5", "invalid request"),
+
+    QUERY_SUCCEED("0", "查询成功"),
+    SAVE_SUCCEED("0", "保存成功"),
+    ADD_SUCCEED("0", "新增成功"),
+    UPDATE_SUCCEED("0", "更新成功"),
+    MODIFY_SUCCEED("0", "修改成功"),
+    DELETE_SUCCEED("0", "删除成功"),
+
+    QUERY_FAILED("-1", "查询失败"),
+    SAVE_FAILED("-1", "保存失败"),
+    ADD_FAILED("-1", "新增失败"),
+    UPDATE_FAILED("-1", "更新失败"),
+    MODIFY_FAILED("-1", "修改失败"),
+    DELETE_FAILED("-1", "删除失败"),
     ;
 
     RestCode(String code, String message) {

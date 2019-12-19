@@ -1,13 +1,17 @@
+server:
+  port: 8000
 spring:
   profiles:
     active: ${KOPDOCTOR_CONFIG_ENV:dev}
   application:
-    name: kopdoctor-demo${KOPDOCTOR_DEVELOPER_NAME:}
+    name: kopdoctor-demo
   cloud:
     consul:
-      host: ${KOPDOCTOR_REGISTRY_ADDRESS:127.0.0.1}
+      host: ${KOPDOCTOR_REGISTRY_ADDRESS:localhost}
       port: 8500
       discovery:
-        service-name: kopdoctor-demo
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.consul.discovery.service-name}:${spring.cloud.client.ip-address}:${server.port}
       config:
         format: yaml

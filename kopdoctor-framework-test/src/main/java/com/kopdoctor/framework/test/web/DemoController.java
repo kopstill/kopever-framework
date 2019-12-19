@@ -1,6 +1,7 @@
 package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
+import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
 import com.kopdoctor.framework.test.common.BusinessCode;
 import com.kopdoctor.framework.test.config.properties.DemoProperties;
@@ -25,11 +26,6 @@ public class DemoController {
     @NonNull
     private DemoProperties demoProperties;
 
-    @GetMapping
-    public Response<Void> root() {
-        return Response.success();
-    }
-
     @GetMapping("/demo/config/single")
     public Response<String> testConfigSingle() {
         return Response.success(demoName);
@@ -47,17 +43,17 @@ public class DemoController {
         demoDTO.setDemoName("get request");
         demoDTO.setCreateTime(new Date());
 
-        return Response.success(BusinessCode.QUERY_SUCCESS, demoDTO);
+        return Response.success(RestCode.QUERY_SUCCEED, demoDTO);
     }
 
     @PostMapping("/demo")
     public Response<DemoDTO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoDTO demoDTO) {
-        return Response.success(BusinessCode.SAVE_SUCCESS, demoDTO);
+        return Response.success(RestCode.SAVE_SUCCEED, demoDTO);
     }
 
     @PutMapping("/demo")
     public Response<DemoDTO> putDemo(@RequestBody @Validated(ValidationGroup.Update.class) DemoDTO demoDTO) {
-        return Response.success(BusinessCode.UPDATE_SUCCESS, demoDTO);
+        return Response.success(RestCode.UPDATE_SUCCEED, demoDTO);
     }
 
     @DeleteMapping("/demo")
@@ -67,7 +63,7 @@ public class DemoController {
         demoDTO.setDemoName("delete request");
         demoDTO.setCreateTime(new Date());
 
-        return Response.success(BusinessCode.DELETE_SUCCESS, demoDTO);
+        return Response.success(RestCode.DELETE_SUCCEED, demoDTO);
     }
 
 }
