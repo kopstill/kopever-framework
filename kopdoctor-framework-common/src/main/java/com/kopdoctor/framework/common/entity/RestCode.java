@@ -19,13 +19,14 @@ public enum RestCode implements IRestCode {
     UPDATE_SUCCEED("0", "更新成功"),
     MODIFY_SUCCEED("0", "修改成功"),
     DELETE_SUCCEED("0", "删除成功"),
+    EXPORT_SUCCEED("0", "导出成功"),
 
     QUERY_FAILED("-1", "查询失败"),
     SAVE_FAILED("-1", "保存失败"),
     ADD_FAILED("-1", "新增失败"),
     UPDATE_FAILED("-1", "更新失败"),
     MODIFY_FAILED("-1", "修改失败"),
-    DELETE_FAILED("-1", "删除失败"),
+    EXPORT_FAILED("-1", "导出失败"),
     ;
 
     RestCode(String code, String message) {

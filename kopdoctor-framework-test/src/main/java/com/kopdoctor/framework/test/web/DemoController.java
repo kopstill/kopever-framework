@@ -3,11 +3,11 @@ package com.kopdoctor.framework.test.web;
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
-import com.kopdoctor.framework.test.common.BusinessCode;
 import com.kopdoctor.framework.test.config.properties.DemoProperties;
 import com.kopdoctor.framework.test.domain.dto.DemoDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
-@RestController
+@Slf4j
 @RefreshScope
 @RequiredArgsConstructor
+@RestController
 public class DemoController {
 
     @Value("${demo.name}")
@@ -25,6 +26,17 @@ public class DemoController {
 
     @NonNull
     private DemoProperties demoProperties;
+
+    @GetMapping("/log")
+    public Response<Void> log() {
+        logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
+
+        return Response.success();
+    }
 
     @GetMapping("/demo/config/single")
     public Response<String> testConfigSingle() {
