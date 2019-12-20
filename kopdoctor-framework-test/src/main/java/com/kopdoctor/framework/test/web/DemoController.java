@@ -13,6 +13,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.channels.AlreadyConnectedException;
 import java.util.Date;
 
 @Slf4j
@@ -36,6 +37,11 @@ public class DemoController {
         logger.error("An ERROR Message");
 
         return Response.success();
+    }
+
+    @GetMapping("/exception")
+    public void exception() {
+        throw RestCode.QUERY_FAILED.toServiceRuntimeException();
     }
 
     @GetMapping("/demo/config/single")

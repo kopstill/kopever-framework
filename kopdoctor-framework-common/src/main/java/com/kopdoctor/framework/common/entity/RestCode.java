@@ -1,5 +1,6 @@
 package com.kopdoctor.framework.common.entity;
 
+import com.kopdoctor.framework.common.exception.ServiceRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +33,22 @@ public enum RestCode implements IRestCode {
     RestCode(String code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    public ServiceRuntimeException toServiceRuntimeException() {
+        return new ServiceRuntimeException(message);
+    }
+
+    public ServiceRuntimeException toServiceRuntimeException(String message) {
+        return new ServiceRuntimeException(message);
+    }
+
+    public ServiceRuntimeException toServiceRuntimeException(String message, Throwable throwable) {
+        return new ServiceRuntimeException(message, throwable);
+    }
+
+    public ServiceRuntimeException toServiceRuntimeException(Object... args) {
+        return new ServiceRuntimeException(String.format(message, args));
     }
 
     @Getter
