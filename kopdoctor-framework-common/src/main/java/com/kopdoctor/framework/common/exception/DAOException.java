@@ -1,4 +1,7 @@
 package com.kopdoctor.framework.common.exception;
 
-public class DAOException {
+public class DAOException extends Exception {
+
+
+
 }

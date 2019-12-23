@@ -1,6 +1,5 @@
 package com.kopdoctor.framework.common.entity;
 
-import com.kopdoctor.framework.common.exception.ServiceRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,25 +29,9 @@ public enum RestCode implements IRestCode {
     EXPORT_FAILED("-1", "导出失败"),
     ;
 
-    RestCode(String code, String message) {
+    RestCode(String code, String msg) {
         this.code = code;
-        this.message = message;
-    }
-
-    public ServiceRuntimeException toServiceRuntimeException() {
-        return new ServiceRuntimeException(message);
-    }
-
-    public ServiceRuntimeException toServiceRuntimeException(String message) {
-        return new ServiceRuntimeException(message);
-    }
-
-    public ServiceRuntimeException toServiceRuntimeException(String message, Throwable throwable) {
-        return new ServiceRuntimeException(message, throwable);
-    }
-
-    public ServiceRuntimeException toServiceRuntimeException(Object... args) {
-        return new ServiceRuntimeException(String.format(message, args));
+        this.msg = msg;
     }
 
     @Getter
@@ -57,6 +40,6 @@ public enum RestCode implements IRestCode {
 
     @Getter
     @Setter
-    private String message;
+    private String msg;
 
 }

@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 public enum BusinessCode implements IRestCode {
 
-    DEMO_NOT_FOUND("10001", "示例未找到"),
+    DEMO_EXCEPTION("10001", "示例异常"),
+    DEMO_EXCEPTION1("10002", "示例异常占位符[%s]"),
     ;
 
     BusinessCode(String code, String message) {

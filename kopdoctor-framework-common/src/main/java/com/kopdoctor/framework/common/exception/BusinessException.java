@@ -1,4 +1,7 @@
 package com.kopdoctor.framework.common.exception;
 
-public class BusinessException {
+public class BusinessException extends Exception {
+
+
+
 }

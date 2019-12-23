@@ -3,8 +3,9 @@ package com.kopdoctor.framework.test.web;
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
+import com.kopdoctor.framework.test.common.BusinessCode;
 import com.kopdoctor.framework.test.config.properties.DemoProperties;
-import com.kopdoctor.framework.test.domain.dto.DemoDTO;
+import com.kopdoctor.framework.test.domain.vo.DemoVO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.channels.AlreadyConnectedException;
 import java.util.Date;
 
 @Slf4j
@@ -41,7 +41,12 @@ public class DemoController {
 
     @GetMapping("/exception")
     public void exception() {
-        throw RestCode.QUERY_FAILED.toServiceRuntimeException();
+        throw RestCode.DELETE_SUCCEED.toRuntimeException();
+    }
+
+    @GetMapping("/exception/placeholder")
+    public void exception1(String placeholder) {
+        throw BusinessCode.DEMO_EXCEPTION1.toRuntimeException(placeholder);
     }
 
     @GetMapping("/demo/config/single")
@@ -55,33 +60,33 @@ public class DemoController {
     }
 
     @GetMapping("/demo")
-    public Response<DemoDTO> getDemo() {
-        DemoDTO demoDTO = new DemoDTO();
-        demoDTO.setId(1L);
-        demoDTO.setDemoName("get request");
-        demoDTO.setCreateTime(new Date());
+    public Response<com.kopdoctor.framework.test.domain.vo.DemoVO> getDemo() {
+        com.kopdoctor.framework.test.domain.vo.DemoVO demoVO = new com.kopdoctor.framework.test.domain.vo.DemoVO();
+        demoVO.setId(1L);
+        demoVO.setDemoName("get request");
+        demoVO.setCreateTime(new Date());
 
-        return Response.success(RestCode.QUERY_SUCCEED, demoDTO);
+        return Response.success(RestCode.QUERY_SUCCEED, demoVO);
     }
 
     @PostMapping("/demo")
-    public Response<DemoDTO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoDTO demoDTO) {
-        return Response.success(RestCode.SAVE_SUCCEED, demoDTO);
+    public Response<com.kopdoctor.framework.test.domain.vo.DemoVO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) com.kopdoctor.framework.test.domain.vo.DemoVO demoVO) {
+        return Response.success(RestCode.SAVE_SUCCEED, demoVO);
     }
 
     @PutMapping("/demo")
-    public Response<DemoDTO> putDemo(@RequestBody @Validated(ValidationGroup.Update.class) DemoDTO demoDTO) {
-        return Response.success(RestCode.UPDATE_SUCCEED, demoDTO);
+    public Response<DemoVO> putDemo(@RequestBody @Validated(ValidationGroup.Update.class) DemoVO demoVO) {
+        return Response.success(RestCode.UPDATE_SUCCEED, demoVO);
     }
 
     @DeleteMapping("/demo")
-    public Response<DemoDTO> deleteDemo() {
-        DemoDTO demoDTO = new DemoDTO();
-        demoDTO.setId(4L);
-        demoDTO.setDemoName("delete request");
-        demoDTO.setCreateTime(new Date());
+    public Response<DemoVO> deleteDemo() {
+        DemoVO demoVO = new DemoVO();
+        demoVO.setId(4L);
+        demoVO.setDemoName("delete request");
+        demoVO.setCreateTime(new Date());
 
-        return Response.success(RestCode.DELETE_SUCCEED, demoDTO);
+        return Response.success(RestCode.DELETE_SUCCEED, demoVO);
     }
 
 }

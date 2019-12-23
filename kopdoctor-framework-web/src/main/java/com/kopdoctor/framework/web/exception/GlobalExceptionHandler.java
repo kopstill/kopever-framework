@@ -2,7 +2,7 @@ package com.kopdoctor.framework.web.exception;
 
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
-import com.kopdoctor.framework.common.exception.ServiceRuntimeException;
+import com.kopdoctor.framework.common.exception.BusinessRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ServiceRuntimeException.class)
-    public Response<Void> handleServiceRuntimeException(ServiceRuntimeException runtimeException) {
-        return Response.errorMessage(runtimeException.getMessage());
+    @ExceptionHandler(BusinessRuntimeException.class)
+    public Response<Void> handleServiceRuntimeException(BusinessRuntimeException businessRuntimeException) {
+        return Response.error(businessRuntimeException.getCode(), businessRuntimeException.getMsg());
     }
 
     @ExceptionHandler(RuntimeException.class)
