@@ -7,7 +7,7 @@ public interface IRestCode extends IBaseRuntimeException {
 
     String getCode();
 
-    String getMsg();
+    String getMessage();
 
     default String code() {
         return getCode();

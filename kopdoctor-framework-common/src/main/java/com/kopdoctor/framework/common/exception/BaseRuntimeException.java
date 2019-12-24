@@ -1,13 +1,24 @@
 package com.kopdoctor.framework.common.exception;
 
+import lombok.Getter;
+
 public abstract class BaseRuntimeException extends RuntimeException implements IBaseRuntimeException {
 
-    public abstract String getCode();
+    @Getter
+    private final String code;
 
-    public abstract String getMsg();
+    @Getter
+    private final String message;
 
-    public BaseRuntimeException(String code, String msg, Throwable throwable) {
-        super(code + ":" + msg, throwable);
+    @Override
+    public String getLocalizedMessage() {
+        return code + ":" + message;
+    }
+
+    public BaseRuntimeException(String code, String message, Throwable throwable) {
+        super(code + ":" + message, throwable);
+        this.code = code;
+        this.message = message;
     }
 
 }

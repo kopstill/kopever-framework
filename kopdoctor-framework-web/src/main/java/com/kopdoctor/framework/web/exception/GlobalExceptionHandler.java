@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessRuntimeException.class)
-    public Response<Void> handleServiceRuntimeException(BusinessRuntimeException businessRuntimeException) {
-        return Response.error(businessRuntimeException.getCode(), businessRuntimeException.getMsg());
+    public Response<Void> handleBusinessRuntimeException(BusinessRuntimeException businessRuntimeException) {
+        return Response.error(businessRuntimeException.getCode(), businessRuntimeException.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)

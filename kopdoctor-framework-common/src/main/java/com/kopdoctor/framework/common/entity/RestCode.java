@@ -29,9 +29,9 @@ public enum RestCode implements IRestCode {
     EXPORT_FAILED("-1", "导出失败"),
     ;
 
-    RestCode(String code, String msg) {
+    RestCode(String code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     @Getter
@@ -40,6 +40,6 @@ public enum RestCode implements IRestCode {
 
     @Getter
     @Setter
-    private String msg;
+    private String message;
 
 }

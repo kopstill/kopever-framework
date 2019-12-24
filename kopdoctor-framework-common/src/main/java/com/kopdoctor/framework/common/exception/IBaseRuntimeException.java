@@ -4,6 +4,6 @@ public interface IBaseRuntimeException {
 
     String getCode();
 
-    String getMsg();
+    String getMessage();
 
 }

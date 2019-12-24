@@ -41,7 +41,7 @@ public class DemoController {
 
     @GetMapping("/exception")
     public void exception() {
-        throw RestCode.DELETE_SUCCEED.toRuntimeException();
+        throw RestCode.QUERY_FAILED.toRuntimeException();
     }
 
     @GetMapping("/exception/placeholder")
