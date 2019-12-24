@@ -16,7 +16,7 @@ public class ResponseTest {
 
         Response<Void> defaultResponse = Response.success();
         System.out.println(Jackson.toJson(defaultResponse));
-        Assert.assertTrue(defaultResponse.getHead().isSuccess());
+        Assert.assertTrue(defaultResponse.isSuccess());
 
         Response<Void> messageResponse = Response.successMessage("success message");
         System.out.println(Jackson.toJson(messageResponse));
@@ -32,6 +32,7 @@ public class ResponseTest {
 
         Response<Void> defaultErrorResponse = Response.error();
         System.out.println(Jackson.toJson(defaultErrorResponse));
+        Assert.assertTrue(defaultErrorResponse.isError());
 
         Response<Void> messageErrorResponse = Response.errorMessage("failure message");
         System.out.println(Jackson.toJson(messageErrorResponse));

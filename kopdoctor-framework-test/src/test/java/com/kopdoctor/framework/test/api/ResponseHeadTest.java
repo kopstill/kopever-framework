@@ -9,20 +9,20 @@ public class ResponseHeadTest {
 
     @Test
     public void testResponseHead() {
-        ResponseHead successHead = ResponseHead.builder().build().success();
+        ResponseHead successHead = ResponseHead.success();
         System.out.println(Jackson.toJson(successHead));
         Assert.assertFalse(successHead.isError());
 
-        ResponseHead successMessageHead = ResponseHead.builder().build().success("success message");
+        ResponseHead successMessageHead = ResponseHead.success("success message");
         System.out.println(Jackson.toJson(successMessageHead));
 
-        ResponseHead failureHead = ResponseHead.builder().build().failure();
+        ResponseHead failureHead = ResponseHead.failure();
         System.out.println(Jackson.toJson(failureHead));
 
-        ResponseHead failureMessageHead = ResponseHead.builder().build().failure("failure message");
+        ResponseHead failureMessageHead = ResponseHead.failure("failure message");
         System.out.println(Jackson.toJson(failureMessageHead));
 
-        ResponseHead failureCodeMessageHead = ResponseHead.builder().build().failure("-12138", "failure message");
+        ResponseHead failureCodeMessageHead = ResponseHead.failure("-12138", "failure message");
         System.out.println(Jackson.toJson(failureCodeMessageHead));
     }
 

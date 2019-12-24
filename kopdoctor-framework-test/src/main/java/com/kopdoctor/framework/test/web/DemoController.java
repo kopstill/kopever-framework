@@ -45,7 +45,7 @@ public class DemoController {
     }
 
     @GetMapping("/exception/placeholder")
-    public void exception1(String placeholder) {
+    public void exception1(@RequestParam(required = false) String placeholder) {
         throw BusinessCode.DEMO_EXCEPTION1.toRuntimeException(placeholder);
     }
 

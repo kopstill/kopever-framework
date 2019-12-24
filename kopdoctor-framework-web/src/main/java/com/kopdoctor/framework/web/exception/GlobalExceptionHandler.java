@@ -8,6 +8,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,6 +49,8 @@ public class GlobalExceptionHandler {
             if (fieldError != null) {
                 return Response.errorMessage("[" + fieldError.getField() + "]" + fieldError.getDefaultMessage());
             }
+        } else if (exception instanceof MissingServletRequestParameterException) {
+            return Response.errorMessage(exception.getMessage());
         }
 
         return Response.error(RestCode.SYSTEM_EXCEPTION);
