@@ -41,6 +41,14 @@ public class RequestUtil {
             logger.error("Dump request exception", e);
         }
 
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String parameterName = parameterNames.nextElement();
+            String parameterValue = request.getParameter(parameterName);
+            builder.append(parameterName).append("=").append(parameterValue);
+            builder.append(parameterNames.hasMoreElements() ? "&" : StringUtils.EMPTY);
+        }
+
         return builder.toString();
     }
 

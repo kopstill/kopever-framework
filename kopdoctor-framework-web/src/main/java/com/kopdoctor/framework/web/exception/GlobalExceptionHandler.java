@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,6 +52,8 @@ public class GlobalExceptionHandler {
             }
         } else if (exception instanceof MissingServletRequestParameterException) {
             return Response.errorMessage(exception.getMessage());
+        } else if (exception instanceof HttpMediaTypeNotSupportedException) {
+            return Response.error(RestCode.HTTP_MEDIA_NOT_SUPPORT);
         }
 
         return Response.error(RestCode.SYSTEM_EXCEPTION);

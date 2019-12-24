@@ -9,9 +9,10 @@ public enum RestCode implements IRestCode {
     FAILURE("-1", "failure"),
     SYSTEM_EXCEPTION("1", "system exception"),
     SYSTEM_RUNTIME_EXCEPTION("2", "system runtime exception"),
-    RESOURCE_NOT_FOUND("3", "resource not found"),
-    INTERNAL_SERVER_ERROR("4", "internal server error"),
-    INVALID_REQUEST("5", "invalid request"),
+    INTERNAL_SERVER_ERROR("3", "internal server error"),
+    INVALID_REQUEST("4", "invalid request"),
+    RESOURCE_NOT_FOUND("5", "resource not found"),
+    HTTP_MEDIA_NOT_SUPPORT("6", "http media not support"),
 
     QUERY_SUCCEED("0", "查询成功"),
     SAVE_SUCCEED("0", "保存成功"),
