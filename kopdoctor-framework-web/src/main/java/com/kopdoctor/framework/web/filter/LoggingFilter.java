@@ -18,7 +18,7 @@ public class LoggingFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         CachedHttpServletRequest request = new CachedHttpServletRequest((HttpServletRequest) servletRequest);
 
-        logger.info("Request begin" + StringUtils.LF + RequestUtil.dumpHttpStandardContent(request));
+        logger.info("Request begin. IP: " + request.getRemoteAddr() + StringUtils.LF + RequestUtil.dumpHttpStandardContent(request));
 
         Instant begin = Instant.now();
 
