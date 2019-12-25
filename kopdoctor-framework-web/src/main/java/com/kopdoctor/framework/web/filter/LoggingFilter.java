@@ -9,7 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.Duration;
-import java.time.LocalTime;
+import java.time.Instant;
 
 @Slf4j
 public class LoggingFilter implements Filter {
@@ -20,11 +20,11 @@ public class LoggingFilter implements Filter {
 
         logger.info("Request begin" + StringUtils.LF + RequestUtil.dumpHttpStandardContent(request));
 
-        LocalTime begin = LocalTime.now();
+        Instant begin = Instant.now();
 
         filterChain.doFilter(request, servletResponse);
 
-        LocalTime end = LocalTime.now();
+        Instant end = Instant.now();
 
         logger.info("Request end. Takes " + Duration.between(begin, end).toMillis() + "ms");
     }

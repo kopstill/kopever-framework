@@ -26,6 +26,10 @@ public class Response<T> {
         return successMessage(RestCode.SUCCESS.getMessage());
     }
 
+    public static <T> Response<T> success(IRestCode restCode) {
+        return success(restCode, null);
+    }
+
     public static <T> Response<T> success(T body) {
         return success(RestCode.SUCCESS.getMessage(), body);
     }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @Builder
@@ -30,7 +32,7 @@ public class ResponseHead {
     }
 
     public static ResponseHead success(String message) {
-        return ResponseHead.builder().build().setCode(RestCode.SUCCESS.getCode()).setMessage(message).setTimestamp(System.currentTimeMillis());
+        return ResponseHead.builder().build().setCode(RestCode.SUCCESS.getCode()).setMessage(message).setTimestamp(Instant.now().toEpochMilli());
     }
 
     public static ResponseHead failure() {
@@ -46,7 +48,7 @@ public class ResponseHead {
     }
 
     public static ResponseHead failure(String code, String message) {
-        return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(System.currentTimeMillis());
+        return ResponseHead.builder().build().setCode(code).setMessage(message).setTimestamp(Instant.now().toEpochMilli());
     }
 
     public boolean isSuccess() {

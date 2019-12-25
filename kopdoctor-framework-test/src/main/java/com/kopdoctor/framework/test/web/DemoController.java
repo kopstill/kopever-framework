@@ -39,9 +39,19 @@ public class DemoController {
         return Response.success();
     }
 
+    @GetMapping("/demo/success")
+    public Response<Void> demoSuccess() {
+        return Response.success(BusinessCode.DEMO_SUCCESS);
+    }
+
     @GetMapping("/exception")
     public void exception() {
         throw RestCode.QUERY_FAILED.toRuntimeException();
+    }
+
+    @GetMapping("/exception/required")
+    public Response<String> exceptionRequired(@RequestParam String required) {
+        return Response.success(required);
     }
 
     @GetMapping("/exception/placeholder")
@@ -61,7 +71,7 @@ public class DemoController {
 
     @GetMapping("/demo")
     public Response<com.kopdoctor.framework.test.domain.vo.DemoVO> getDemo() {
-        com.kopdoctor.framework.test.domain.vo.DemoVO demoVO = new com.kopdoctor.framework.test.domain.vo.DemoVO();
+        DemoVO demoVO = new DemoVO();
         demoVO.setId(1L);
         demoVO.setDemoName("get request");
         demoVO.setCreateTime(new Date());
@@ -70,7 +80,7 @@ public class DemoController {
     }
 
     @PostMapping("/demo")
-    public Response<com.kopdoctor.framework.test.domain.vo.DemoVO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) com.kopdoctor.framework.test.domain.vo.DemoVO demoVO) {
+    public Response<DemoVO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoVO demoVO) {
         return Response.success(RestCode.SAVE_SUCCEED, demoVO);
     }
 
