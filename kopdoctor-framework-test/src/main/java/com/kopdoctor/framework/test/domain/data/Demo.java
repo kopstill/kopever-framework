@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class DemoDO {
+public class Demo {
 
     private Long id;
 

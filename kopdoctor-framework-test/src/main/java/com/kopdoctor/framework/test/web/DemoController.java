@@ -2,10 +2,12 @@ package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
+import com.kopdoctor.framework.common.mapper.Dozer;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
 import com.kopdoctor.framework.test.common.BusinessCode;
-import com.kopdoctor.framework.test.config.properties.DemoProperties;
+import com.kopdoctor.framework.test.configuration.properties.DemoProperties;
 import com.kopdoctor.framework.test.domain.vo.DemoVO;
+import com.kopdoctor.framework.test.service.DemoService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +16,17 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @RefreshScope
 @RequiredArgsConstructor
 @RestController
 public class DemoController {
+
+    private final DemoService demoService;
 
     @Value("${demo.name}")
     private String demoName;
@@ -70,13 +76,11 @@ public class DemoController {
     }
 
     @GetMapping("/demo")
-    public Response<com.kopdoctor.framework.test.domain.vo.DemoVO> getDemo() {
-        DemoVO demoVO = new DemoVO();
-        demoVO.setId(1L);
-        demoVO.setDemoName("get request");
-        demoVO.setCreateTime(new Date());
+    public Response<List<DemoVO>> getDemo() {
+        List<DemoVO> list = new ArrayList<>();
+        demoService.list().forEach(data -> list.add(Dozer.map(data, DemoVO.class)));
 
-        return Response.success(RestCode.QUERY_SUCCEED, demoVO);
+        return Response.success(RestCode.QUERY_SUCCEED, list.isEmpty() ? null : list);
     }
 
     @PostMapping("/demo")

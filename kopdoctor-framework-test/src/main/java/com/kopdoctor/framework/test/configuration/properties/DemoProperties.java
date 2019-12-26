@@ -1,4 +1,4 @@
-package com.kopdoctor.framework.test.config.properties;
+package com.kopdoctor.framework.test.configuration.properties;
 
 import lombok.Getter;
 import lombok.Setter;

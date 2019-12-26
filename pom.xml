@@ -33,6 +33,7 @@
         <module>kopdoctor-framework-core</module>
         <module>kopdoctor-framework-common</module>
         <module>kopdoctor-framework-test</module>
+        <module>kopdoctor-framework-data</module>
     </modules>
 
     <dependencyManagement>
@@ -63,6 +64,11 @@
                 <version>${kopdoctor-framework.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.kopdoctor</groupId>
+                <artifactId>kopdoctor-framework-data</artifactId>
+                <version>${kopdoctor-framework.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
@@ -90,6 +96,21 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.18</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.dozermapper</groupId>
+                <artifactId>dozer-core</artifactId>
+                <version>6.5.0</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>

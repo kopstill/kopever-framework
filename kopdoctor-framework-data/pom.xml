@@ -10,21 +10,17 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kopdoctor-framework-api</artifactId>
+    <artifactId>kopdoctor-framework-data</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.kopdoctor</groupId>
-            <artifactId>kopdoctor-framework-common</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
 </project>

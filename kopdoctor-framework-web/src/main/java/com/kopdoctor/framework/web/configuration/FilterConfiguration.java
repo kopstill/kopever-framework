@@ -1,4 +1,4 @@
-package com.kopdoctor.framework.web.config;
+package com.kopdoctor.framework.web.configuration;
 
 import com.kopdoctor.framework.web.constant.WebOrder;
 import com.kopdoctor.framework.web.filter.LoggingFilter;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FilterConfig {
+public class FilterConfiguration {
 
     @Value("${kopdoctor.framework.filter.logging.enabled:true}")
     private boolean loggingFilterEnabled;
