@@ -13,5 +13,7 @@ spring:
         service-name: ${spring.application.name}
         prefer-ip-address: true
         instance-id: ${spring.cloud.consul.discovery.service-name}:${spring.cloud.client.ip-address}:${server.port}
+        acl-token: 508ae906-5526-fda0-668c-2a0f115b753a
       config:
         format: yaml
+        acl-token: 508ae906-5526-fda0-668c-2a0f115b753a
