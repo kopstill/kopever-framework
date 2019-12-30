@@ -13,12 +13,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import sun.net.httpserver.HttpServerImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RefreshScope
@@ -101,6 +105,16 @@ public class DemoController {
         demoVO.setCreateTime(new Date());
 
         return Response.success(RestCode.DELETE_SUCCEED, demoVO);
+    }
+
+    @PostMapping(value = "/demo/form-urlencoded")
+    public Response<Void> formUrlencodedDemo(HttpServletRequest request) {
+        return Response.success();
+    }
+
+    @PostMapping(value = "/demo/form-data", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Response<Void> formDataDemo(HttpServletRequest request) {
+        return Response.success();
     }
 
 }

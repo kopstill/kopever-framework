@@ -14,9 +14,11 @@ import java.util.Map;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Jackson {
 
-    private static ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper;
 
-    private static ObjectMapper snakeMapper;
+    private static final ObjectMapper snakeMapper;
+
+    private static final PropertyNamingStrategy.SnakeCaseStrategy snakeCaseStrategy;
 
     static {
         objectMapper = new ObjectMapper();
@@ -25,6 +27,8 @@ public class Jackson {
         snakeMapper = new ObjectMapper();
         snakeMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+
+        snakeCaseStrategy = new PropertyNamingStrategy.SnakeCaseStrategy();
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {
@@ -85,6 +89,10 @@ public class Jackson {
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public static String toSnakeCase(String input) {
+        return snakeCaseStrategy.translate(input);
     }
 
 }

@@ -24,7 +24,7 @@ public class DemoVO {
     private String demoContent;
 
     @NotNull(groups = ValidationGroup.Create.class)
-    @IntEnum(enums = {1, 2, 3})
+    @IntEnum(enums = {1, 2, 3}, groups = ValidationGroup.Create.class)
     private Integer demoType;
 
     @NotNull(groups = ValidationGroup.Create.class)

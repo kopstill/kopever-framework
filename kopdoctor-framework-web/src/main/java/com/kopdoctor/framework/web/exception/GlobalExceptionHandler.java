@@ -3,6 +3,7 @@ package com.kopdoctor.framework.web.exception;
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.common.exception.BusinessRuntimeException;
+import com.kopdoctor.framework.common.json.Jackson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
         }
 
         if (fieldError != null) {
-            return Response.errorMessage("[" + fieldError.getField() + "]" + fieldError.getDefaultMessage());
+            return Response.errorMessage("[" + Jackson.toSnakeCase(fieldError.getField()) + "]" + fieldError.getDefaultMessage());
         }
 
         return Response.error(RestCode.INVALID_REQUEST);
