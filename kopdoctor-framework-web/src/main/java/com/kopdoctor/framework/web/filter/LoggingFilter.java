@@ -16,13 +16,14 @@ public class LoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        CachedHttpServletRequest request = new CachedHttpServletRequest((HttpServletRequest) servletRequest);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        CachedHttpServletRequest cachedRequest = new CachedHttpServletRequest(httpServletRequest);
 
-        logger.info("Request begin. IP: " + request.getRemoteAddr() + StringUtils.LF + RequestUtil.dumpHttpStandardContent(request));
+        logger.info("Request begin. IP: " + cachedRequest.getRemoteAddr() + StringUtils.LF + RequestUtil.dumpHttpStandardContent(httpServletRequest));
 
         Instant begin = Instant.now();
 
-        filterChain.doFilter(request, servletResponse);
+        filterChain.doFilter(cachedRequest, servletResponse);
 
         Instant end = Instant.now();
 

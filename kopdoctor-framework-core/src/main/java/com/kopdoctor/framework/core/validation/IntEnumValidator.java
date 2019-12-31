@@ -19,7 +19,7 @@ public class IntEnumValidator implements ConstraintValidator<IntEnum, Integer> {
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
-        return enums == null || enums.contains(value);
+        return value == null || enums.contains(value);
     }
 
 }
