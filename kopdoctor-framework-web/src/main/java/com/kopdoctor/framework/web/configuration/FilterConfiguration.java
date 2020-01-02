@@ -19,8 +19,7 @@ public class FilterConfiguration {
     @ConditionalOnProperty(value = ConfigKey.FILTER_LOGGING_ENABLED, havingValue = "true")
     public FilterRegistrationBean<LoggingFilter> filterRegistrationBean() {
         FilterRegistrationBean<LoggingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        LoggingFilter loggingFilter = new LoggingFilter();
-        filterRegistrationBean.setFilter(loggingFilter);
+        filterRegistrationBean.setFilter(new LoggingFilter());
         filterRegistrationBean.addUrlPatterns(urlPatterns.split(","));
         filterRegistrationBean.setOrder(WebOrder.LOGGING_FILTER_ORDER);
 

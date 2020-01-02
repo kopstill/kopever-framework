@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.entity.ContentType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -30,21 +31,28 @@ public class RequestUtil {
 
         builder.append(StringUtils.LF);
 
-        try {
-            String body = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
-            if (StringUtils.isNotBlank(body)) {
-                builder.append(body);
-            }
-        } catch (IOException e) {
-            logger.error("Dump request exception", e);
-        }
+        String contentType = request.getContentType();
+        if (StringUtils.isBlank(contentType)) return builder.toString();
 
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String parameterName = parameterNames.nextElement();
-            String parameterValue = request.getParameter(parameterName);
-            builder.append(parameterName).append("=").append(parameterValue);
-            builder.append(parameterNames.hasMoreElements() ? "&" : StringUtils.EMPTY);
+        String mimeType = ContentType.parse(contentType).getMimeType();
+        if (mimeType.equals(ContentType.APPLICATION_FORM_URLENCODED.getMimeType()) ||
+                mimeType.equals(ContentType.MULTIPART_FORM_DATA.getMimeType())) {
+            Enumeration<String> parameterNames = request.getParameterNames();
+            while (parameterNames.hasMoreElements()) {
+                String parameterName = parameterNames.nextElement();
+                String parameterValue = request.getParameter(parameterName);
+                builder.append(parameterName).append("=").append(parameterValue);
+                builder.append(parameterNames.hasMoreElements() ? "&" : StringUtils.EMPTY);
+            }
+        } else {
+            try {
+                String body = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+                if (StringUtils.isNotBlank(body)) {
+                    builder.append(body);
+                }
+            } catch (IOException e) {
+                logger.error("Dump request stream exception", e);
+            }
         }
 
         return builder.toString();
