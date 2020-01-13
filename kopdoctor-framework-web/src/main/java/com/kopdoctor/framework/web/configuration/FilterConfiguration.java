@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfiguration {
 
-    @Value("${kopdoctor.framework.filter.logging.url-patterns:/*}")
+    @Value("${" + ConfigKey.FILTER_LOGGING_URL_PATTERNS + ":/*}")
     private String urlPatterns;
 
     @Bean

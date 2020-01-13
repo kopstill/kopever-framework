@@ -14,6 +14,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.kopdoctor</groupId>
+            <artifactId>kopdoctor-framework-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>

@@ -1,5 +1,6 @@
 package com.kopdoctor.framework.common.exception;
 
+import com.kopdoctor.framework.common.entity.RestCode;
 import lombok.Getter;
 
 public abstract class BaseRuntimeException extends RuntimeException implements IBaseRuntimeException {
@@ -15,8 +16,12 @@ public abstract class BaseRuntimeException extends RuntimeException implements I
         return code + ":" + message;
     }
 
-    public BaseRuntimeException(String code, String message, Throwable throwable) {
-        super(code + ":" + message, throwable);
+    public BaseRuntimeException(String message) {
+        this(RestCode.SYSTEM_RUNTIME_EXCEPTION.getCode(), message);
+    }
+
+    public BaseRuntimeException(String code, String message) {
+        super(code + ":" + message);
         this.code = code;
         this.message = message;
     }
