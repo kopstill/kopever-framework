@@ -1,9 +1,15 @@
 package com.kopdoctor.framework.common.exception;
 
-public class SystemRuntimeException extends BaseRuntimeException {
+import com.kopdoctor.framework.common.entity.RestCode;
+
+public class SystemRuntimeException extends BaseCodedRuntimeException {
 
     public SystemRuntimeException(String message) {
-        super(message);
+        this(RestCode.SYSTEM_RUNTIME_EXCEPTION.getCode(), message);
+    }
+
+    private SystemRuntimeException(String code, String message) {
+        super(code, message);
     }
 
 }

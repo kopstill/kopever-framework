@@ -3,6 +3,7 @@ package com.kopdoctor.framework.web.exception;
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.common.exception.BusinessRuntimeException;
+import com.kopdoctor.framework.common.exception.SystemRuntimeException;
 import com.kopdoctor.framework.common.json.Jackson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(BusinessRuntimeException.class)
-    public Response<Void> handleBusinessRuntimeException(BusinessRuntimeException businessRuntimeException) {
-        return Response.error(businessRuntimeException.getCode(), businessRuntimeException.getMessage());
-    }
-
     @ExceptionHandler(RuntimeException.class)
     public Response<Void> handleRuntimeException(RuntimeException runtimeException) {
         logger.error("Handle runtime exception", runtimeException);
 
-        if (runtimeException instanceof HttpMessageNotReadableException) {
+        if (runtimeException instanceof BusinessRuntimeException) {
+            BusinessRuntimeException businessRuntimeException = (BusinessRuntimeException) runtimeException;
+            return Response.error(businessRuntimeException.getCode(), businessRuntimeException.getMessage());
+        } else if (runtimeException instanceof SystemRuntimeException) {
+            SystemRuntimeException systemRuntimeException = (SystemRuntimeException) runtimeException;
+            return Response.error(systemRuntimeException.getCode(), systemRuntimeException.getMessage());
+        } else if (runtimeException instanceof HttpMessageNotReadableException) {
             return Response.error(RestCode.INVALID_REQUEST);
         }
 

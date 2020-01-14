@@ -110,13 +110,13 @@ public class DemoController {
         return Response.success(RestCode.DELETE_SUCCEED, demoVO);
     }
 
-    @PostMapping(value = "/demo/form-urlencoded")
+    @PostMapping(value = "/demo/form-urlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public Response<DemoVO> formUrlencodedDemo(@Validated(ValidationGroup.Create.class) DemoVO demoVO) {
         return Response.success(demoVO);
     }
 
     @PostMapping(value = "/demo/form-data", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Response<DemoVO> formDataDemo(@Validated(ValidationGroup.Update.class) DemoVO demoVO) {
+    public Response<DemoVO> formDataDemo(@Validated(ValidationGroup.Create.class) DemoVO demoVO) {
         return Response.success(demoVO);
     }
 
