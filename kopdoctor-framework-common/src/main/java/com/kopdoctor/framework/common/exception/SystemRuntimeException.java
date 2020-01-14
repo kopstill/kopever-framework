@@ -6,8 +6,4 @@ public class SystemRuntimeException extends BaseRuntimeException {
         super(message);
     }
 
-    public SystemRuntimeException(String code, String message) {
-        super(code, message);
-    }
-
 }

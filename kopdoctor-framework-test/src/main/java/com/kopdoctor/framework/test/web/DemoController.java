@@ -2,6 +2,7 @@ package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
 import com.kopdoctor.framework.common.entity.RestCode;
+import com.kopdoctor.framework.common.exception.SystemRuntimeException;
 import com.kopdoctor.framework.common.mapper.Dozer;
 import com.kopdoctor.framework.core.validation.ValidationGroup;
 import com.kopdoctor.framework.test.common.BusinessCode;
@@ -56,13 +57,18 @@ public class DemoController {
         throw RestCode.QUERY_FAILED.toRuntimeException();
     }
 
+    @GetMapping("/exception/runtime/system")
+    public void systemRuntimeException() {
+        throw new SystemRuntimeException("This is system runtime exception");
+    }
+
     @GetMapping("/exception/required")
-    public Response<String> exceptionRequired(@RequestParam String required) {
+    public Response<String> requiredException(@RequestParam String required) {
         return Response.success(required);
     }
 
     @GetMapping("/exception/placeholder")
-    public void exception1(@RequestParam(required = false) String placeholder) {
+    public void exceptionWithPlaceholder(@RequestParam(required = false) String placeholder) {
         throw BusinessCode.DEMO_EXCEPTION1.toRuntimeException(placeholder);
     }
 

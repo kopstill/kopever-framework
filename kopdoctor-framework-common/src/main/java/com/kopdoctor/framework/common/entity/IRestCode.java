@@ -21,8 +21,8 @@ public interface IRestCode extends IBaseRuntimeException {
         return new BusinessRuntimeException(code(), message());
     }
 
-    default RuntimeException toRuntimeException(Object... params) {
-        return new BusinessRuntimeException(getCode(), String.format(getMessage(), params));
+    default RuntimeException toRuntimeException(Object... parameters) {
+        return new BusinessRuntimeException(getCode(), String.format(getMessage(), parameters));
     }
 
 }
