@@ -1,4 +1,4 @@
-package com.kopdoctor.framework.core.id;
+package com.kopdoctor.framework.core.id.impl.snowflake;
 
 import com.kopdoctor.framework.common.exception.SystemRuntimeException;
 

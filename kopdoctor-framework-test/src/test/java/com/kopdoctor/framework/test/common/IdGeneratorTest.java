@@ -1,6 +1,6 @@
 package com.kopdoctor.framework.test.common;
 
-import com.kopdoctor.framework.core.id.SnowflakeIdWorker;
+import com.kopdoctor.framework.core.id.impl.snowflake.SnowflakeIdWorker;
 import org.junit.Assert;
 import org.junit.Test;
 
