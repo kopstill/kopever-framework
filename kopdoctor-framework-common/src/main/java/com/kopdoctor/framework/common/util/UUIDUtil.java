@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UuidUtil {
+public class UUIDUtil {
 
     public static UUID getUUID() {
         return UUID.randomUUID();

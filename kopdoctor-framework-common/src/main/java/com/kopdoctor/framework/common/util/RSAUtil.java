@@ -11,7 +11,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
-public class RsaUtil {
+public class RSAUtil {
 
     private static final String ALGORITHM = "RSA";
     private static final String SHA256WITHRSA = "SHA256withRSA";
