@@ -12,7 +12,7 @@ import java.util.Base64;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DESUtil {
 
-    //偏移量，必须8位
+    // 偏移量，必须8位
     private static final String DEFAULT_IV = "c$rb*r!w";
 
     private static final String DES = "DES";

@@ -1,11 +1,15 @@
 package com.kopdoctor.framework.common.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AESUtil {
 
     // 偏移量，必须16位
