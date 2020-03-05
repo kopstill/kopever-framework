@@ -21,8 +21,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <kopdoctor-framework.version>0.0.1-SNAPSHOT</kopdoctor-framework.version>
-        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
     </properties>
 
     <modules>
@@ -128,13 +128,13 @@
     </dependencyManagement>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-packaging</artifactId>
-                <version>3.1.2</version>
-            </extension>
-        </extensions>
+        <!--        <extensions>-->
+        <!--            <extension>-->
+        <!--                <groupId>org.apache.maven.archetype</groupId>-->
+        <!--                <artifactId>archetype-packaging</artifactId>-->
+        <!--                <version>3.1.2</version>-->
+        <!--            </extension>-->
+        <!--        </extensions>-->
 
         <pluginManagement>
             <plugins>
