@@ -1,19 +1,19 @@
 package com.kopdoctor.framework.test.common;
 
-import com.kopdoctor.framework.common.util.DESUtil;
+import com.kopdoctor.framework.common.util.AESUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DESTest {
+public class AESTest {
 
     @Test
-    public void testDES() {
-        String key = "ci^xkza!";
+    public void testAES() {
+        String key = "h&flvrczvd$pkj*dmkwuk@z#rprfeww@";
         String str = "hello world";
 
-        String encrypted = DESUtil.encrypt(str, key);
+        String encrypted = AESUtil.encrypt(str, key);
         System.out.println(encrypted);
-        String decrypted = DESUtil.decrypt(encrypted, key);
+        String decrypted = AESUtil.decrypt(encrypted, key);
         System.out.println(decrypted);
 
         Assert.assertEquals(str, decrypted);
