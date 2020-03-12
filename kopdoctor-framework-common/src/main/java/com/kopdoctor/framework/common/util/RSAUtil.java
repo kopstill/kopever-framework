@@ -1,31 +1,32 @@
 package com.kopdoctor.framework.common.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RSAUtil {
 
+    private static final int KEY_SIZE = 4096;
     private static final String ALGORITHM = "RSA";
-    private static final String SHA256WITHRSA = "SHA256withRSA";
     private static final String SHA1WITHRSA = "SHA1WithRSA";
-    private static final int KEY_SIZE = 1024;
-    private static final String ENCODING = "UTF-8";
+    private static final String SHA256WITHRSA = "SHA256withRSA";
 
     /**
      * 产出密钥对
      */
     public static KeyPair initKey() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ALGORITHM);
-        keyPairGenerator.initialize(KEY_SIZE);
-        return keyPairGenerator.generateKeyPair();
+        return initKey(KEY_SIZE);
     }
 
     /**
@@ -38,65 +39,47 @@ public class RSAUtil {
     }
 
     /**
-     * 产出公钥对象
+     * 转换为公钥字符串
      */
-    public static PublicKey toPublicKey(byte[] publicKeyByte) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
-        return keyFactory.generatePublic(new X509EncodedKeySpec(publicKeyByte));
+    public static String getPublicKey(PublicKey publicKey) {
+        return new String(Base64.getEncoder().encode(publicKey.getEncoded()), StandardCharsets.UTF_8);
     }
 
     /**
      * 产出公钥对象
      */
     public static PublicKey toPublicKey(String publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
-        return keyFactory.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(publicKey)));
+        return toPublicKey(Base64.getDecoder().decode(publicKey));
     }
 
     /**
-     * 产出私钥对象
+     * 产出公钥对象
      */
-    public static PrivateKey toPrivateKey(byte[] privateKeyByte) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static PublicKey toPublicKey(byte[] publicKeyByte) throws NoSuchAlgorithmException, InvalidKeySpecException {
         KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
-        return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateKeyByte));
+        return keyFactory.generatePublic(new X509EncodedKeySpec(publicKeyByte));
+    }
+
+    /**
+     * 转换为私钥字符串
+     */
+    public static String getPrivateKey(PrivateKey privateKey) {
+        return new String(Base64.getEncoder().encode(privateKey.getEncoded()), StandardCharsets.UTF_8);
     }
 
     /**
      * 产出私钥对象
      */
     public static PrivateKey toPrivateKey(String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        return toPrivateKey(Base64.getDecoder().decode(privateKey));
+    }
+
+    /**
+     * 产出私钥对象
+     */
+    private static PrivateKey toPrivateKey(byte[] privateKeyByte) throws NoSuchAlgorithmException, InvalidKeySpecException {
         KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
-        return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey)));
-    }
-
-    /**
-     * 私钥签名
-     */
-    public static byte[] signSHA256(String content, byte[] privateKeyByte) throws
-            InvalidKeySpecException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            UnsupportedEncodingException,
-            SignatureException {
-        PrivateKey priKey = toPrivateKey(privateKeyByte);
-
-        Signature signature = Signature.getInstance(SHA256WITHRSA);
-        signature.initSign(priKey);
-        signature.update(content.getBytes(ENCODING));
-
-        return signature.sign();
-    }
-
-    /**
-     * 私钥签名
-     */
-    public static String signSHA256(String content, String privateKey) throws
-            InvalidKeySpecException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            UnsupportedEncodingException,
-            SignatureException {
-        return sign(content, privateKey, SHA256WITHRSA);
+        return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateKeyByte));
     }
 
     /**
@@ -106,9 +89,19 @@ public class RSAUtil {
             InvalidKeySpecException,
             NoSuchAlgorithmException,
             InvalidKeyException,
-            UnsupportedEncodingException,
             SignatureException {
         return sign(content, privateKey, SHA1WITHRSA);
+    }
+
+    /**
+     * 私钥签名
+     */
+    public static String signSHA256(String content, String privateKey) throws
+            InvalidKeySpecException,
+            NoSuchAlgorithmException,
+            InvalidKeyException,
+            SignatureException {
+        return sign(content, privateKey, SHA256WITHRSA);
     }
 
     /**
@@ -118,45 +111,14 @@ public class RSAUtil {
             InvalidKeySpecException,
             NoSuchAlgorithmException,
             InvalidKeyException,
-            UnsupportedEncodingException,
             SignatureException {
         PrivateKey priKey = toPrivateKey(privateKey);
 
         Signature signature = Signature.getInstance(algorithm);
         signature.initSign(priKey);
-        signature.update(content.getBytes(ENCODING));
+        signature.update(content.getBytes(StandardCharsets.UTF_8));
 
-        return Base64.getEncoder().encodeToString(signature.sign());
-    }
-
-    /**
-     * 公钥验签
-     */
-    public static boolean verifySignSHA256(String content, byte[] publicKeyByte, byte[] sign) throws
-            InvalidKeySpecException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            UnsupportedEncodingException,
-            SignatureException {
-        PublicKey pubKey = toPublicKey(publicKeyByte);
-
-        Signature signature = Signature.getInstance(SHA256WITHRSA);
-        signature.initVerify(pubKey);
-        signature.update(content.getBytes(ENCODING));
-
-        return signature.verify(sign);
-    }
-
-    /**
-     * 公钥验签
-     */
-    public static boolean verifySignSHA256(String content, String publicKey, String sign) throws
-            InvalidKeySpecException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            UnsupportedEncodingException,
-            SignatureException {
-        return verifySign(content, publicKey, sign, SHA256WITHRSA);
+        return new String(Base64.getEncoder().encode(signature.sign()), StandardCharsets.UTF_8);
     }
 
     /**
@@ -166,9 +128,19 @@ public class RSAUtil {
             InvalidKeySpecException,
             NoSuchAlgorithmException,
             InvalidKeyException,
-            UnsupportedEncodingException,
             SignatureException {
         return verifySign(content, publicKey, sign, SHA1WITHRSA);
+    }
+
+    /**
+     * 公钥验签
+     */
+    public static boolean verifySignSHA256(String content, String publicKey, String sign) throws
+            InvalidKeySpecException,
+            NoSuchAlgorithmException,
+            InvalidKeyException,
+            SignatureException {
+        return verifySign(content, publicKey, sign, SHA256WITHRSA);
     }
 
     /**
@@ -178,13 +150,12 @@ public class RSAUtil {
             InvalidKeySpecException,
             NoSuchAlgorithmException,
             InvalidKeyException,
-            UnsupportedEncodingException,
             SignatureException {
         PublicKey pubKey = toPublicKey(publicKey);
 
         Signature signature = Signature.getInstance(algorithm);
         signature.initVerify(pubKey);
-        signature.update(content.getBytes(ENCODING));
+        signature.update(content.getBytes(StandardCharsets.UTF_8));
 
         return signature.verify(Base64.getDecoder().decode(sign));
     }
@@ -192,34 +163,31 @@ public class RSAUtil {
     /**
      * 公钥加密
      */
-    public static String encrypt(String content, String publicKey) throws
+    public static String encrypt(String plainText, String publicKey) throws
             NoSuchPaddingException,
             NoSuchAlgorithmException,
             InvalidKeySpecException,
             InvalidKeyException,
             BadPaddingException,
-            IllegalBlockSizeException,
-            UnsupportedEncodingException {
+            IllegalBlockSizeException {
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, toPublicKey(publicKey));
-        return Base64.getEncoder().encodeToString(cipher.doFinal(content.getBytes(ENCODING)));
+        return new String(Base64.getEncoder().encode(cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
     }
 
     /**
      * 私钥解密
      */
-    public static String decrypt(String content, String privateKey) throws
+    public static String decrypt(String cipherText, String privateKey) throws
             NoSuchPaddingException,
             NoSuchAlgorithmException,
             InvalidKeySpecException,
             InvalidKeyException,
             BadPaddingException,
-            IllegalBlockSizeException,
-            UnsupportedEncodingException {
+            IllegalBlockSizeException {
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, toPrivateKey(privateKey));
-        byte[] buf = Base64.getDecoder().decode(content);
-        return new String(cipher.doFinal(buf), ENCODING);
+        return new String(cipher.doFinal(Base64.getDecoder().decode(cipherText)), StandardCharsets.UTF_8);
     }
 
 }
