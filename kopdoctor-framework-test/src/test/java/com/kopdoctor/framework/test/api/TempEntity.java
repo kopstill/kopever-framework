@@ -15,4 +15,12 @@ public class TempEntity {
 
     private Date time;
 
+    public Date getTime() {
+        return time == null ? null : (Date) time.clone();
+    }
+
+    public void setTime(Date time) {
+        this.time = time == null ? null : (Date) time.clone();
+    }
+
 }
