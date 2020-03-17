@@ -1,6 +1,7 @@
 package com.kopdoctor.framework.test.api;
 
 import com.kopdoctor.framework.api.entity.Response;
+import com.kopdoctor.framework.common.entity.RestCode;
 import com.kopdoctor.framework.common.json.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,46 +15,67 @@ public class ResponseTest {
         TempEntity tempEntity = new TempEntity();
         tempEntity.setId(123L).setName("name").setTime(new Date());
 
-        Response<Void> defaultResponse = Response.success();
-        System.out.println(Jackson.toJson(defaultResponse));
-        Assert.assertTrue(defaultResponse.isSuccess());
+        Response<Void> success0 = Response.success();
+        System.out.println(Jackson.toJson(success0));
 
-        Response<Void> messageResponse = Response.successMessage("success message");
-        System.out.println(Jackson.toJson(messageResponse));
+        Response<Void> success1 = Response.success(RestCode.QUERY_SUCCEED);
+        System.out.println(Jackson.toJson(success1));
 
-        Response<String> stringResponse = Response.success("hello");
-        System.out.println(Jackson.toJson(stringResponse));
+        Response<TempEntity> success2 = Response.success(tempEntity);
+        System.out.println(Jackson.toJson(success2));
 
-        Response<TempEntity> entityResponse = Response.success(tempEntity);
-        System.out.println(Jackson.toJson(entityResponse));
+        Response<TempEntity> success3 = Response.success(RestCode.ADD_SUCCEED, tempEntity);
+        System.out.println(Jackson.toJson(success3));
 
-        Response<TempEntity> messageEntityResponse = Response.success("Okay", tempEntity);
-        System.out.println(Jackson.toJson(messageEntityResponse));
+        Response<Void> success4 = Response.success("SUCCESS", "保存成功");
+        System.out.println(Jackson.toJson(success4));
 
-        Response<Void> defaultErrorResponse = Response.error();
-        System.out.println(Jackson.toJson(defaultErrorResponse));
-        Assert.assertTrue(defaultErrorResponse.isError());
+        Response<TempEntity> success5 = Response.success("SUCCESS", "更新成功", tempEntity);
+        System.out.println(Jackson.toJson(success5));
 
-        Response<Void> messageErrorResponse = Response.errorMessage("failure message");
-        System.out.println(Jackson.toJson(messageErrorResponse));
+        Response<Void> success6 = Response.successCode("SUCCESS");
+        System.out.println(Jackson.toJson(success6));
 
-        Response<TempEntity> entityErrorResponse = Response.error(tempEntity);
-        System.out.println(Jackson.toJson(entityErrorResponse));
+        Response<TempEntity> success7 = Response.successCode("SUCCESS", tempEntity);
+        System.out.println(Jackson.toJson(success7));
 
-        Response<Void> codeMessageErrorResponse = Response.error("-12138", "error message");
-        System.out.println(Jackson.toJson(codeMessageErrorResponse));
+        Response<Void> success8 = Response.successMessage("SUCCESS MESSAGE");
+        System.out.println(Jackson.toJson(success8));
 
-        Response<TempEntity> codeMessageEntityErrorResponse = Response.error("-12138", "failed", tempEntity);
-        System.out.println(Jackson.toJson(codeMessageEntityErrorResponse));
+        Response<TempEntity> success9 = Response.successMessage("SUCCESS MESSAGE", tempEntity);
+        System.out.println(Jackson.toJson(success9));
+        Assert.assertTrue(success9.isSuccess());
 
-        Response<Void> errorCodeResponse = Response.errorCode("-9527");
-        System.out.println(Jackson.toJson(errorCodeResponse));
+        Response<Void> error0 = Response.error();
+        System.out.println(Jackson.toJson(error0));
 
-        Response<TempEntity> errorCodeEntityResponse = Response.errorCode("-9527", tempEntity);
-        System.out.println(Jackson.toJson(errorCodeEntityResponse));
+        Response<Void> error1 = Response.error(RestCode.QUERY_FAILED);
+        System.out.println(Jackson.toJson(error1));
 
-        Response<TempEntity> errorMessageEntityResponse = Response.errorMessage("error entity message", tempEntity);
-        System.out.println(Jackson.toJson(errorMessageEntityResponse));
+        Response<TempEntity> error2 = Response.error(tempEntity);
+        System.out.println(Jackson.toJson(error2));
+
+        Response<TempEntity> error3 = Response.error(RestCode.ADD_FAILED, tempEntity);
+        System.out.println(Jackson.toJson(error3));
+
+        Response<Void> error4 = Response.error("FAILURE", "保存失败");
+        System.out.println(Jackson.toJson(error4));
+
+        Response<TempEntity> error5 = Response.error("FAILURE", "更新失败", tempEntity);
+        System.out.println(Jackson.toJson(error5));
+
+        Response<Void> error6 = Response.errorCode("FAILURE");
+        System.out.println(Jackson.toJson(error6));
+
+        Response<TempEntity> error7 = Response.errorCode("FAILURE", tempEntity);
+        System.out.println(Jackson.toJson(error7));
+
+        Response<Void> error8 = Response.errorMessage("FAILURE MESSAGE");
+        System.out.println(Jackson.toJson(error8));
+
+        Response<TempEntity> error9 = Response.errorMessage("FAILURE MESSAGE", tempEntity);
+        System.out.println(Jackson.toJson(error9));
+        Assert.assertTrue(error9.isError());
     }
 
 }

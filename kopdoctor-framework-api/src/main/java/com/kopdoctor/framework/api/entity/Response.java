@@ -18,28 +18,44 @@ public class Response<T> {
 
     private T body;
 
-    public static Response<Void> successMessage(String message) {
-        return Response.<Void>builder().build().setHead(ResponseHead.success(message));
-    }
-
     public static Response<Void> success() {
-        return successMessage(RestCode.SUCCESS.getMessage());
+        return success(RestCode.SUCCESS);
     }
 
-    public static <T> Response<T> success(IRestCode restCode) {
+    public static Response<Void> success(IRestCode restCode) {
         return success(restCode, null);
     }
 
     public static <T> Response<T> success(T body) {
-        return success(RestCode.SUCCESS.getMessage(), body);
+        return success(RestCode.SUCCESS, body);
     }
 
     public static <T> Response<T> success(IRestCode restCode, T body) {
-        return success(restCode.getMessage(), body);
+        return success(restCode.getCode(), restCode.getMessage(), body);
     }
 
-    public static <T> Response<T> success(String message, T body) {
-        return Response.<T>builder().build().setHead(ResponseHead.success(message)).setBody(body);
+    public static Response<Void> success(String code, String message) {
+        return success(code, message, null);
+    }
+
+    public static <T> Response<T> success(String code, String message, T body) {
+        return Response.<T>builder().build().setHead(ResponseHead.success(code, message)).setBody(body);
+    }
+
+    public static Response<Void> successCode(String code) {
+        return successCode(code, null);
+    }
+
+    public static <T> Response<T> successCode(String code, T body) {
+        return success(code, RestCode.SUCCESS.getMessage(), body);
+    }
+
+    public static Response<Void> successMessage(String message) {
+        return successMessage(message, null);
+    }
+
+    public static <T> Response<T> successMessage(String message, T body) {
+        return success(RestCode.SUCCESS.getCode(), message, body);
     }
 
     public static Response<Void> error() {
@@ -50,36 +66,36 @@ public class Response<T> {
         return error(restCode.getCode(), restCode.getMessage());
     }
 
-    public static Response<Void> errorCode(String code) {
-        return error(code, RestCode.FAILURE.getMessage());
-    }
-
-    public static Response<Void> errorMessage(String message) {
-        return error(RestCode.FAILURE.getCode(), message);
-    }
-
-    public static Response<Void> error(String code, String message) {
-        return Response.<Void>builder().build().setHead(ResponseHead.failure(code, message));
-    }
-
     public static <T> Response<T> error(T body) {
         return error(RestCode.FAILURE, body);
-    }
-
-    public static <T> Response<T> errorCode(String code, T body) {
-        return error(code, RestCode.FAILURE.getMessage(), body);
-    }
-
-    public static <T> Response<T> errorMessage(String message, T body) {
-        return error(RestCode.FAILURE.getCode(), message, body);
     }
 
     public static <T> Response<T> error(IRestCode restCode, T body) {
         return error(restCode.getCode(), restCode.getMessage(), body);
     }
 
+    public static Response<Void> error(String code, String message) {
+        return error(code, message, null);
+    }
+
     public static <T> Response<T> error(String code, String message, T body) {
         return Response.<T>builder().build().setHead(ResponseHead.failure(code, message)).setBody(body);
+    }
+
+    public static Response<Void> errorCode(String code) {
+        return errorCode(code, null);
+    }
+
+    public static <T> Response<T> errorCode(String code, T body) {
+        return error(code, RestCode.FAILURE.getMessage(), body);
+    }
+
+    public static Response<Void> errorMessage(String message) {
+        return errorMessage(message, null);
+    }
+
+    public static <T> Response<T> errorMessage(String message, T body) {
+        return error(RestCode.FAILURE.getCode(), message, body);
     }
 
     @JsonIgnore
