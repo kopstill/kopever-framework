@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.entity.ContentType;
+import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -29,14 +29,13 @@ public class RequestUtil {
             builder.append(headerName).append(":").append(StringUtils.SPACE).append(headerValue).append(StringUtils.LF);
         }
 
-        builder.append(StringUtils.LF);
-
         String contentType = request.getContentType();
         if (StringUtils.isBlank(contentType)) return builder.toString();
 
-        String mimeType = ContentType.parse(contentType).getMimeType();
-        if (mimeType.equals(ContentType.APPLICATION_FORM_URLENCODED.getMimeType()) ||
-                mimeType.equals(ContentType.MULTIPART_FORM_DATA.getMimeType())) {
+        builder.append(StringUtils.LF);
+
+        MediaType mediaType = MediaType.parseMediaType(contentType);
+        if (MediaType.APPLICATION_FORM_URLENCODED.equalsTypeAndSubtype(mediaType) || MediaType.MULTIPART_FORM_DATA.equalsTypeAndSubtype(mediaType)) {
             Enumeration<String> parameterNames = request.getParameterNames();
             while (parameterNames.hasMoreElements()) {
                 String parameterName = parameterNames.nextElement();

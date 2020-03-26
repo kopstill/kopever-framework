@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
     public Response<Void> handleBindException(Exception exception) {
-        logger.error("Handle bind exception", exception);
+        logger.error("Handle bind exception");
 
         FieldError fieldError;
         if (exception instanceof BindException) {
