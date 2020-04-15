@@ -11,20 +11,26 @@ import java.util.Date;
 @Setter
 public class DemoMO {
 
-    private Long id;
+    private String id;
 
-    private String name;
+    private String demoName;
 
-    private String content;
+    private String demoContent;
 
-    private Date date;
+    private Integer demoType;
 
-    public void setDate(Date date) {
-        this.date = date == null ? null : (Date) date.clone();
+    private Integer demoStatus;
+
+    private String remark;
+
+    private Date createTime;
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime == null ? null : (Date) createTime.clone();
     }
 
-    public Date getDate() {
-        return date == null ? null : (Date) date.clone();
+    public Date getCreateTime() {
+        return createTime == null ? null : (Date) createTime.clone();
     }
 
 }

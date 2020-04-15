@@ -1,21 +1,29 @@
 package com.kopdoctor.framework.test.web;
 
 import com.kopdoctor.framework.api.entity.Response;
+import com.kopdoctor.framework.common.mapper.Dozer;
+import com.kopdoctor.framework.core.validation.ValidationGroup;
+import com.kopdoctor.framework.test.domain.dto.DemoDTO;
 import com.kopdoctor.framework.test.domain.mo.DemoMO;
-import com.kopdoctor.framework.test.service.MongoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RestController(value = "/mongo")
+@RestController
+@RequestMapping("/mongo")
 public class MongoController {
 
-    private final MongoService mongoService;
+    private final MongoTemplate mongoTemplate;
 
-    @PostMapping
-    public Response<Object> saveToMongo(DemoMO demoDTO) {
-        return Response.success(mongoService.save(demoDTO));
+    @PostMapping("/test")
+    public Response<DemoMO> saveToMongo(@RequestBody @Validated(ValidationGroup.Create.class) DemoDTO demoDTO) {
+        DemoMO demo = mongoTemplate.save(Dozer.map(demoDTO, DemoMO.class));
+        return Response.success(demo);
     }
 
 }
