@@ -17,7 +17,7 @@ public class ExecutorTest {
 
     private static class TempTask extends Thread {
 
-        private int i;
+        private final int i;
 
         private TempTask(int i) {
             this.i = i;
