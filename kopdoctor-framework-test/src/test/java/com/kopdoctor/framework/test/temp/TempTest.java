@@ -7,9 +7,10 @@ public class TempTest {
 
     @Test
     public void testRemoveDuplicates() {
-        int[] arr = {1, 1, 1, 2, 2, 3, 3, 3};
-        Assert.assertEquals(6, removeDuplicates(arr));
-        Assert.assertEquals(6, removeDuplicates1(arr));
+        int[] arr = {1, 1, 1, 2, 2, 3, 3, 3, 7};
+        int[] arr1 = {1, 1, 1, 2, 2, 3, 3, 3, 7};
+        Assert.assertEquals(7, removeDuplicates(arr));
+        Assert.assertEquals(7, removeDuplicates1(arr1));
     }
 
     public int removeDuplicates(int[] nums) {
@@ -17,6 +18,7 @@ public class TempTest {
         for (int n : nums)
             if (i < 2 || n > nums[i - 2])
                 nums[i++] = n;
+
         return i;
     }
 
@@ -31,7 +33,6 @@ public class TempTest {
         // elements one by one.
         //
         for (int i = 1; i < nums.length; i++) {
-
             //
             // If the current element is a duplicate, increment the count.
             //
@@ -40,7 +41,6 @@ public class TempTest {
                 count++;
 
             } else {
-
                 //
                 // Reset the count since we encountered a different element
                 // than the previous one.
@@ -56,6 +56,7 @@ public class TempTest {
                 nums[j++] = nums[i];
             }
         }
+
         return j;
     }
 
