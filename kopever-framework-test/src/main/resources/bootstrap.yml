@@ -1,0 +1,19 @@
+server:
+  port: 8000
+spring:
+  profiles:
+    active: ${KOPEVER_CONFIG_ENV:dev}
+  application:
+    name: kopever-demo
+  cloud:
+    consul:
+      host: ${KOPEVER_REGISTRY_ADDRESS:localhost}
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.consul.discovery.service-name}:${spring.cloud.client.ip-address}:${server.port}
+        acl-token: 508ae906-5526-fda0-668c-2a0f115b753a
+      config:
+        format: yaml
+        acl-token: 508ae906-5526-fda0-668c-2a0f115b753a

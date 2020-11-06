@@ -1,7 +1,7 @@
-cd /Users/kopever/Workspace/workspace-gitlab/kopdoctor-framework/kopdoctor-parent
+cd /Users/kopever/Workspace/workspace-gitlab/kopever-framework/kopever-parent
 mvn clean install
-cd /Users/kopever/Workspace/workspace-gitlab/kopdoctor-framework/kopdoctor-archetype
+cd /Users/kopever/Workspace/workspace-gitlab/kopever-framework/kopever-archetype
 mvn clean install
 cd /Users/kopever/Workspace/temp
-rm -r kopdoctor-demo
-mvn archetype:generate -DgroupId=com.kopdoctor.demo -DartifactId=kopdoctor-demo -DarchetypeGroupId=com.kopdoctor -DarchetypeArtifactId=kopdoctor-archetype -DinteractiveMode=false
+rm -r kopever-demo
+mvn archetype:generate -DgroupId=com.kopever.demo -DartifactId=kopever-demo -DarchetypeGroupId=com.kopever -DarchetypeArtifactId=kopever-archetype -DinteractiveMode=false

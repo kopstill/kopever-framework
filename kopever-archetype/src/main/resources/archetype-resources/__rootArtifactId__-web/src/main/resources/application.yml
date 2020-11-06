@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ${rootArtifactId}${KOPEVER_DEVELOPER_NAME}
+  cloud:
+    consul:
+      host: ${KOPEVER_REGISTRY_ADDRESS}
+      port: 8500
+      discovery:
+        service-name: ${rootArtifactId}
+        hostname: ${rootArtifactId}
