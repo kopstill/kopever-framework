@@ -10,7 +10,7 @@
             <defaultValue>kopdoctor-demo</defaultValue>
         </requiredProperty>
         <requiredProperty key="version">
-            <defaultValue>0.0.1-SNAPSHOT</defaultValue>
+            <defaultValue>1.0.0</defaultValue>
         </requiredProperty>
     </requiredProperties>
 
