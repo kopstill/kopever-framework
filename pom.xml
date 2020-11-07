@@ -38,6 +38,7 @@
         <module>kopever-framework-test</module>
         <module>kopever-framework-data</module>
         <module>kopever-framework-mongodb</module>
+        <module>kopever-framework-redis</module>
     </modules>
 
     <dependencyManagement>
@@ -117,6 +118,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>8.0.22</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.8.0</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
