@@ -85,7 +85,7 @@ public class DemoController {
     @GetMapping("/demo")
     public Response<List<DemoVO>> getDemo() {
         List<DemoVO> list = new ArrayList<>();
-        demoService.list().forEach(data -> list.add(Dozer.map(data, DemoVO.class)));
+        demoService.selectAll().forEach(data -> list.add(Dozer.map(data, DemoVO.class)));
 
         return Response.success(RestCode.QUERY_SUCCEED, list.isEmpty() ? null : list);
     }

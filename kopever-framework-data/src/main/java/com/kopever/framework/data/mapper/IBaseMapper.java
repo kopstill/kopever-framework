@@ -1,7 +1,9 @@
 package com.kopever.framework.data.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import tk.mybatis.mapper.annotation.RegisterMapper;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface IBaseMapper<T> extends BaseMapper<T> {
+@RegisterMapper
+public interface IBaseMapper<T> extends Mapper<T> {
 
 }
