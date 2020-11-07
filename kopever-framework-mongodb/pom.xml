@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>kopever-framework-data-mongodb</artifactId>
+    <artifactId>kopever-framework-mongodb</artifactId>
 
     <dependencies>
         <dependency>
