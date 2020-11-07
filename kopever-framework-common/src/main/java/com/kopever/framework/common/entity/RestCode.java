@@ -13,6 +13,7 @@ public enum RestCode implements IRestCode {
     RESOURCE_NOT_FOUND("5", "resource not found"),
     HTTP_MEDIA_NOT_SUPPORT("6", "http media not support"),
     METHOD_NOT_ALLOWED("7", "method not allowed"),
+    INVALID_ARGUMENT_TYPE("8", "invalid argument type"),
 
     QUERY_SUCCEED("0", "查询成功"),
     SAVE_SUCCEED("0", "保存成功"),

@@ -17,4 +17,9 @@ public abstract class BaseCodedRuntimeException extends BaseRuntimeException {
         this.code = code;
     }
 
+    public BaseCodedRuntimeException(String code, String message, Throwable throwable) {
+        super(message, throwable);
+        this.code = code;
+    }
+
 }

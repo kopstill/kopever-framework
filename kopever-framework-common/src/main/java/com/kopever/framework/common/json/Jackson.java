@@ -1,13 +1,16 @@
 package com.kopever.framework.common.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +20,8 @@ public class Jackson {
     private static final ObjectMapper objectMapper;
 
     private static final ObjectMapper snakeMapper;
+
+    private static final ObjectMapper ignoreNullMapper;
 
     private static final PropertyNamingStrategy.SnakeCaseStrategy snakeCaseStrategy;
 
@@ -28,6 +33,10 @@ public class Jackson {
         snakeMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 
+        ignoreNullMapper = new ObjectMapper();
+        snakeMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ignoreNullMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
         snakeCaseStrategy = new PropertyNamingStrategy.SnakeCaseStrategy();
     }
 
@@ -35,8 +44,24 @@ public class Jackson {
         return fromJsonViaJavaType(json, objectMapper.constructType(clazz), false);
     }
 
+    public static <T> T fromJson(String json, Class<?> rawClass, Class<?> elementClass) {
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(rawClass, elementClass);
+        return fromJsonViaJavaType(json, javaType, false);
+    }
+
+    public static <T> T fromJson(String json, Class<?> rawClass, Class<? extends Collection> collectionClass, Class<?> elementClass) {
+        CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(rawClass, collectionType);
+        return fromJsonViaJavaType(json, javaType, false);
+    }
+
     public static <T> T fromJsonSnakeCase(String json, Class<T> clazz) {
         return fromJsonViaJavaType(json, objectMapper.constructType(clazz), true);
+    }
+
+    public static <T> T fromJsonSnakeCase(String json, Class<?> collectionClass, Class<?>... elementClasses) {
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+        return fromJsonViaJavaType(json, javaType, true);
     }
 
     private static <T> T fromJsonViaJavaType(String json, JavaType javaType, boolean isSnakeCase) {
@@ -70,6 +95,14 @@ public class Jackson {
     public static String toJsonSnakeCase(Object object) {
         try {
             return snakeMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static String toJsonIgnoreNull(Object object) {
+        try {
+            return ignoreNullMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }

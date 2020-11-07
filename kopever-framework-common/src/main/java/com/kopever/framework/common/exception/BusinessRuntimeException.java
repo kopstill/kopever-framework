@@ -6,4 +6,8 @@ public class BusinessRuntimeException extends BaseCodedRuntimeException {
         super(code, message);
     }
 
+    public BusinessRuntimeException(String code, String message, Throwable throwable) {
+        super(code, message, throwable);
+    }
+
 }

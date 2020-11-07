@@ -1,67 +1,47 @@
 package com.kopever.framework.common.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
-/**
- * AES加密
- */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AESUtil {
 
-    // 默认的AES加密方式：AES/ECB/PKCS5Padding
-    private static final String AES = "AES";
+    private static final String AES_CIPHER = "AES/CBC/PKCS5PADDING";
 
-    /**
-     * 加密
-     *
-     * @param str 待加密明文
-     * @param key 密钥(必须16/24/32位)
-     * @return 加密密文
-     */
-    public static String encrypt(String str, String key) {
-        try {
-            byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+    private static final String AES_ALGORITHM = "AES";
 
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), AES);
+    private static final String AES_ENCODING = "UTF-8";
 
-            Cipher cipher = Cipher.getInstance(AES);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            bytes = cipher.doFinal(bytes);
-            bytes = Base64.getEncoder().encode(bytes);
+    public static String encrypt(String value, String secret, String vector) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+        Cipher cipher = Cipher.getInstance(AES_CIPHER);
+        SecretKeySpec skeySpec = new SecretKeySpec(secret.getBytes(AES_ENCODING), AES_ALGORITHM);
+        IvParameterSpec iv = new IvParameterSpec(vector.getBytes(AES_ENCODING));
 
-            return new String(bytes, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+
+        byte[] encrypted = cipher.doFinal(value.getBytes(AES_ENCODING));
+
+        return DatatypeConverter.printBase64Binary(encrypted);
     }
 
-    /**
-     * 解密
-     *
-     * @param str 待解密密文
-     * @param key 密钥(必须16/24/32位)
-     * @return 解密明文
-     */
-    public static String decrypt(String str, String key) {
-        try {
-            byte[] bytes = Base64.getDecoder().decode(str);
+    public static String decrypt(String encrypted, String secret, String vector) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+        Cipher cipher = Cipher.getInstance(AES_CIPHER);
+        SecretKeySpec skeySpec = new SecretKeySpec(secret.getBytes(AES_ENCODING), AES_ALGORITHM);
+        IvParameterSpec iv = new IvParameterSpec(vector.getBytes(AES_ENCODING));
 
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), AES);
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 
-            Cipher cipher = Cipher.getInstance(AES);
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            bytes = cipher.doFinal(bytes);
+        byte[] original = cipher.doFinal(DatatypeConverter.parseBase64Binary(encrypted));
 
-            return new String(bytes, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
+        return new String(original, AES_ENCODING);
     }
 
 }

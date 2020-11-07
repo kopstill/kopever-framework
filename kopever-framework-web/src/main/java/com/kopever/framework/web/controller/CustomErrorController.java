@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 
 @Slf4j
@@ -26,9 +27,11 @@ public class CustomErrorController extends AbstractErrorController {
     }
 
     @RequestMapping
-    public Response<Void> error(HttpServletRequest request) {
+    public Response<Void> error(HttpServletRequest request, HttpServletResponse response) {
         HttpStatus status = getStatus(request);
         logger.error(status.toString());
+
+        response.setCharacterEncoding("utf-8");
 
         if (status == HttpStatus.NOT_FOUND) {
             return Response.error(RestCode.RESOURCE_NOT_FOUND);

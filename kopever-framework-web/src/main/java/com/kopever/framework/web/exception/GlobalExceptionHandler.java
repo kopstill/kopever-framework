@@ -6,6 +6,7 @@ import com.kopever.framework.common.exception.BusinessRuntimeException;
 import com.kopever.framework.common.exception.SystemRuntimeException;
 import com.kopever.framework.common.json.Jackson;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Slf4j
 @ResponseBody
@@ -34,6 +38,8 @@ public class GlobalExceptionHandler {
             return Response.error(systemRuntimeException.getCode(), systemRuntimeException.getMessage());
         } else if (runtimeException instanceof HttpMessageNotReadableException) {
             return Response.error(RestCode.INVALID_REQUEST);
+        } else if (runtimeException instanceof MethodArgumentTypeMismatchException) {
+            return Response.error(RestCode.INVALID_ARGUMENT_TYPE);
         }
 
         return Response.error(RestCode.SYSTEM_RUNTIME_EXCEPTION);
@@ -55,6 +61,13 @@ public class GlobalExceptionHandler {
         }
 
         return Response.error(RestCode.INVALID_REQUEST);
+    }
+
+    @ExceptionHandler(value = NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response<Void> noHandlerFoundException(NoHandlerFoundException e) {
+        logger.error(e.getMessage());
+        return Response.error(RestCode.RESOURCE_NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
