@@ -17,7 +17,7 @@ public class DemoVO {
     @NotNull(groups = {ValidationGroup.Update.class, ValidationGroup.Delete.class, ValidationGroup.Query.class})
     private Long id;
 
-    @NotBlank(groups = ValidationGroup.Create.class)
+    @NotBlank(groups = ValidationGroup.Create.class, message = "hhhhhhhhhhhh")
     private String demoName;
 
     @NotBlank(groups = ValidationGroup.Create.class)

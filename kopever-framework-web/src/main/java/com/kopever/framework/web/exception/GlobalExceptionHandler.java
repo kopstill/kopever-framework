@@ -48,10 +48,10 @@ public class GlobalExceptionHandler {
     public Response<Void> handleBindException(Exception exception) {
         logger.error("Handle bind exception");
 
-        FieldError fieldError;
+        FieldError fieldError = null;
         if (exception instanceof BindException) {
             fieldError = ((BindException) exception).getFieldError();
-        } else {
+        } else if (exception instanceof MethodArgumentNotValidException) {
             fieldError = ((MethodArgumentNotValidException) exception).getBindingResult().getFieldError();
         }
 

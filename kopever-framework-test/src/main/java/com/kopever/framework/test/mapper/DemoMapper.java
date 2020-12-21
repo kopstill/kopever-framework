@@ -1,4 +1,4 @@
-package com.kopever.framework.test.dao;
+package com.kopever.framework.test.mapper;
 
 import com.kopever.framework.data.mapper.IBaseMapper;
 import com.kopever.framework.test.domain.data.Demo;

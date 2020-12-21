@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    username: kopever
+    password: $g^xpVxN9!WYAgag45$2Rw$sVyj9vwd^
+    url: jdbc:mysql://193.112.50.99:3306/kopever?useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      minimumIdle: 10
+      maximum-pool-size: 100
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+#  data:
+#    mongodb:
+#      uri: mongodb://kopever:3f8fMfDqIUpk0GJVoj5PkZlT@193.112.50.99:27017/kopever
+
+mybatis-plus:
+  global-config:
+    banner: false
+
+logging:
+  level:
+    com.kopever.framework.test.web: ${KOPEVER_LOGGING_LEVEL:INFO}
+    com.kopever.framework.test.dao: ${KOPEVER_LOGGING_LEVEL:INFO}
+
+kopever:
+  framework:
+    filter:
+      logging:
+        enabled: true
+        url-patterns: /*
+
+demo:
+  name: kopever-demo
+  content: 靠谱就是KOP
+  type: 1
+  status: 0
+  remark: 世界和平
+  list:
+    - 卡特尔
+    - 辛迪加
+    - 托拉斯
+    - 康采恩
+  camel-case-field: OJBK
