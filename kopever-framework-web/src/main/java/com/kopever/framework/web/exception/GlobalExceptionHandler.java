@@ -4,7 +4,6 @@ import com.kopever.framework.api.entity.Response;
 import com.kopever.framework.common.entity.RestCode;
 import com.kopever.framework.common.exception.BusinessRuntimeException;
 import com.kopever.framework.common.exception.SystemRuntimeException;
-import com.kopever.framework.common.json.Jackson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -57,7 +56,7 @@ public class GlobalExceptionHandler {
         }
 
         if (fieldError != null) {
-            return Response.errorMessage("[" + Jackson.toSnakeCase(fieldError.getField()) + "]" + fieldError.getDefaultMessage());
+            return Response.errorMessage(fieldError.getDefaultMessage());
         }
 
         return Response.error(RestCode.INVALID_REQUEST);
