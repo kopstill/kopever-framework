@@ -20,19 +20,19 @@ public class RequestUtil {
         StringBuilder builder = new StringBuilder();
         builder.append(request.getMethod()).append(StringUtils.SPACE).
                 append(request.getRequestURI()).append(StringUtils.defaultIfBlank(request.getQueryString(), StringUtils.EMPTY)).append(StringUtils.SPACE).
-                append(request.getProtocol()).append(StringUtils.LF);
+                append(request.getProtocol()).append(StringUtils.CR + StringUtils.LF);
 
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             String headerValue = request.getHeader(headerName);
-            builder.append(headerName).append(":").append(StringUtils.SPACE).append(headerValue).append(StringUtils.LF);
+            builder.append(headerName).append(":").append(StringUtils.SPACE).append(headerValue).append(StringUtils.CR + StringUtils.LF);
         }
 
         String contentType = request.getContentType();
         if (StringUtils.isBlank(contentType)) return builder.toString();
 
-        builder.append(StringUtils.LF);
+        builder.append(StringUtils.CR + StringUtils.LF);
 
         MediaType mediaType = MediaType.parseMediaType(contentType);
         if (MediaType.APPLICATION_FORM_URLENCODED.equalsTypeAndSubtype(mediaType) || MediaType.MULTIPART_FORM_DATA.equalsTypeAndSubtype(mediaType)) {
