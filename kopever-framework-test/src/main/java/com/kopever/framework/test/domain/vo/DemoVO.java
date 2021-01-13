@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -22,6 +23,8 @@ public class DemoVO {
 
     @NotBlank(groups = ValidationGroup.Create.class)
     private String demoContent;
+
+    private BigDecimal demoDecimal;
 
     @NotNull(groups = ValidationGroup.Create.class)
     @IntEnum(enums = {1, 2, 3})

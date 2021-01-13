@@ -3,6 +3,7 @@ package com.kopever.framework.test.domain.data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -14,6 +15,8 @@ public class Demo {
     private String demoName;
 
     private String demoContent;
+
+    private BigDecimal demoDecimal;
 
     private Short demoType;
 
