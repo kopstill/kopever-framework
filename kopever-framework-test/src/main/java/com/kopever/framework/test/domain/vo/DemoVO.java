@@ -24,7 +24,7 @@ public class DemoVO {
     @NotBlank(groups = ValidationGroup.Create.class)
     private String demoContent;
 
-    private BigDecimal demoDecimal;
+    private BigDecimal demoPrice;
 
     @NotNull(groups = ValidationGroup.Create.class)
     @IntEnum(enums = {1, 2, 3})

@@ -16,7 +16,7 @@ public class Demo {
 
     private String demoContent;
 
-    private BigDecimal demoDecimal;
+    private BigDecimal demoPrice;
 
     private Short demoType;
 

@@ -19,7 +19,7 @@ public class RequestUtil {
     public static String dumpHttpStandardContent(HttpServletRequest request) {
         StringBuilder builder = new StringBuilder();
         builder.append(request.getMethod()).append(StringUtils.SPACE).
-                append(request.getRequestURI()).append(StringUtils.defaultIfBlank(request.getQueryString(), StringUtils.EMPTY)).append(StringUtils.SPACE).
+                append(request.getRequestURI()).append(StringUtils.defaultIfBlank("?" + request.getQueryString(), StringUtils.EMPTY)).append(StringUtils.SPACE).
                 append(request.getProtocol()).append(StringUtils.CR + StringUtils.LF);
 
         Enumeration<String> headerNames = request.getHeaderNames();
