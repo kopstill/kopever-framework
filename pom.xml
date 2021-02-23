@@ -7,6 +7,7 @@
     <groupId>com.kopever</groupId>
     <artifactId>kopever-framework</artifactId>
     <version>1.0.0</version>
+
     <packaging>pom</packaging>
 
     <properties>
@@ -20,6 +21,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
+        <kopever-framework.version>1.0.0</kopever-framework.version>
         <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-data.version>2020.0.0</spring-data.version>
@@ -45,42 +47,42 @@
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-api</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-cloud</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-common</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-core</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-data</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-mongodb</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-redis</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kopever</groupId>
                 <artifactId>kopever-framework-web</artifactId>
-                <version>${project.version}</version>
+                <version>${kopever-framework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
