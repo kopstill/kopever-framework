@@ -38,7 +38,7 @@ public class ResponseHead {
         return ResponseHead.builder().build().
                 setCode(code).
                 setMessage(message).
-                setTimestamp(Instant.now().toEpochMilli()).
+                setTimestamp(Instant.now().toEpochMilli() / 1000).
                 setSuccess(true).
                 setError(false);
     }
@@ -51,7 +51,7 @@ public class ResponseHead {
         return ResponseHead.builder().build().
                 setCode(code).
                 setMessage(message).
-                setTimestamp(Instant.now().toEpochMilli()).
+                setTimestamp(Instant.now().toEpochMilli() / 1000).
                 setSuccess(false).
                 setError(true);
     }
