@@ -1,3 +1,3 @@
 # kopever-framework
 
-Cloud native archetype based on Java and Spring.
+Cloud native archetype framework based on Java and Spring.
