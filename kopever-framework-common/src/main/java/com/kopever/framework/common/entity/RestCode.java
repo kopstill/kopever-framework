@@ -37,9 +37,9 @@ public enum RestCode implements IRestCode {
     }
 
     @Getter
-    private String code;
+    private final String code;
 
     @Getter
-    private String message;
+    private final String message;
 
 }

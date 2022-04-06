@@ -26,7 +26,7 @@ enum DozerEnumInstance {
 
     INSTANCE;
 
-    private Mapper mapper;
+    private final Mapper mapper;
 
     DozerEnumInstance() {
         mapper = DozerBeanMapperBuilder.create().build();

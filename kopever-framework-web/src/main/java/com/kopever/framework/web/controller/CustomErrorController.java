@@ -42,9 +42,4 @@ public class CustomErrorController extends AbstractErrorController {
         return Response.error(RestCode.SYSTEM_EXCEPTION);
     }
 
-    @Override
-    public String getErrorPath() {
-        return errorPath;
-    }
-
 }
