@@ -5,10 +5,12 @@ import com.kopever.framework.common.entity.RestCode;
 import com.kopever.framework.common.exception.SystemRuntimeException;
 import com.kopever.framework.common.mapper.Dozer;
 import com.kopever.framework.core.validation.ValidationGroup;
+import com.kopever.framework.redis.Redis;
 import com.kopever.framework.test.common.BusinessCode;
 import com.kopever.framework.test.configuration.properties.DemoProperties;
 import com.kopever.framework.test.domain.vo.DemoVO;
-import com.kopever.framework.test.service.DemoService;
+import com.kopever.framework.test.domain.vo.RedisDemoVO;
+//import com.kopever.framework.test.service.DemoService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +30,15 @@ import java.util.List;
 @RestController
 public class DemoController {
 
-    private final DemoService demoService;
+//    private final DemoService demoService;
 
     @Value("${demo.name}")
     private String demoName;
 
     @NonNull
     private DemoProperties demoProperties;
+
+    private final Redis redis;
 
     @GetMapping("/log")
     public Response<Void> log() {
@@ -82,13 +86,13 @@ public class DemoController {
         return Response.success(demoProperties);
     }
 
-    @GetMapping("/demo")
-    public Response<List<DemoVO>> getDemo() {
-        List<DemoVO> list = new ArrayList<>();
-        demoService.selectAll().forEach(data -> list.add(Dozer.map(data, DemoVO.class)));
-
-        return Response.success(RestCode.QUERY_SUCCEED, list.isEmpty() ? null : list);
-    }
+//    @GetMapping("/demo")
+//    public Response<List<DemoVO>> getDemo() {
+//        List<DemoVO> list = new ArrayList<>();
+//        demoService.selectAll().forEach(data -> list.add(Dozer.map(data, DemoVO.class)));
+//
+//        return Response.success(RestCode.QUERY_SUCCEED, list.isEmpty() ? null : list);
+//    }
 
     @PostMapping("/demo")
     public Response<DemoVO> postDemo(@RequestBody @Validated(ValidationGroup.Create.class) DemoVO demoVO) {
@@ -118,6 +122,12 @@ public class DemoController {
     @PostMapping(value = "/demo/form-data", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Response<DemoVO> formDataDemo(@Validated(ValidationGroup.Create.class) DemoVO demoVO) {
         return Response.success(demoVO);
+    }
+
+    @PostMapping("/redis")
+    public Response<Void> redisDemo(@RequestBody RedisDemoVO vo) {
+        redis.set(vo.getRedisKey(), vo.getRedisValue());
+        return Response.success();
     }
 
 }
