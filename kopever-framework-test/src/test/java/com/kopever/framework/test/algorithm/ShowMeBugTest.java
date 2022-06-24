@@ -5,7 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowMeBug {
+public class ShowMeBugTest {
+
+    @Test
+    public void testDirection() {
+        String[] params = new String[]{"WEST", "EAST", "EAST", "EAST"};
+        String[] result = dirReduce(params);
+        for (String str : result) {
+            System.out.println(str);
+        }
+    }
 
     private enum Direction {
         EAST("WEST"),
@@ -21,15 +30,6 @@ public class ShowMeBug {
 
         String getReDirection() {
             return this.reDirection;
-        }
-    }
-
-    @Test
-    public void testDirection() {
-        String[] params = new String[]{"WEST", "EAST", "EAST", "EAST"};
-        String[] result = dirReduce(params);
-        for (String str : result) {
-            System.out.println(str);
         }
     }
 
