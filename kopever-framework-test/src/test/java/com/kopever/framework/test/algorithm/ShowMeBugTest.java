@@ -3,13 +3,20 @@ package com.kopever.framework.test.algorithm;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ShowMeBugTest {
 
     @Test
     public void testDirection() {
-        String[] params = new String[]{"WEST", "EAST", "EAST", "EAST"};
+//        String[] params = new String[]{"WEST", "SOUTH", "EAST", "NORTH"};
+//        String[] params = new String[]{"NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"};
+//        String[] params = new String[]{"NORTH", "SOUTH", "EAST", "WEST"};
+//        String[] params = new String[]{"NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"};
+//        String[] params = new String[]{"NORTH", "WEST", "SOUTH", "EAST"};
+        String[] params = new String[]{"NORTH", "WEST", "SOUTH", "EAST", "WEST", "NORTH", "EAST", "SOUTH", "WEST", "WEST", "EAST", "EAST"};
         String[] result = dirReduce(params);
         for (String str : result) {
             System.out.println(str);
@@ -38,33 +45,20 @@ public class ShowMeBugTest {
             return directions;
         }
 
-        List<String> result = new ArrayList<>();
+        List<String> directionList = new LinkedList<>(Arrays.asList(directions));
+        for (int i = 0; i < directionList.size() - 1; i++) {
+            String cuDirection = directionList.get(i);
+            String neDirection = directionList.get(i + 1);
+            String reDirection = Direction.valueOf(cuDirection).getReDirection();
 
-        for (int i = 0; i < directions.length; i++) {
-            Direction direction = Direction.valueOf(directions[i]);
-            String reDirection = direction.getReDirection();
-
-            if (i == 0) {
-                if (!reDirection.equals(directions[i + 1])) {
-                    result.add(directions[i]);
-                    continue;
-                }
-            }
-
-            if (i == directions.length - 1) {
-                if (!reDirection.equals(directions[i - 1])) {
-                    result.add(directions[i]);
-                }
-                break;
-            }
-
-            if (!reDirection.equals(directions[i + 1]) &&
-                    !reDirection.equals(directions[i - 1])) {
-                result.add(directions[i]);
+            if (reDirection.equals(neDirection)) {
+                directionList.remove(i);
+                directionList.remove(i);
+                return dirReduce(directionList.toArray(new String[]{}));
             }
         }
 
-        return result.toArray(new String[]{});
+        return directionList.toArray(new String[]{});
     }
 
 }
