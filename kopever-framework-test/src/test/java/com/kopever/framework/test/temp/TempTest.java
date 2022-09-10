@@ -3,6 +3,9 @@ package com.kopever.framework.test.temp;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TempTest {
 
     @Test
@@ -58,6 +61,19 @@ public class TempTest {
         }
 
         return j;
+    }
+
+    @Test
+    public void test() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        for (String item : list) {
+            if ("1".equals(item)) {
+                list.remove(item);
+            }
+        }
+        System.out.println(list);
     }
 
 }
