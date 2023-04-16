@@ -2,11 +2,11 @@ package com.kopever.framework.web.filter;
 
 import com.kopever.framework.web.request.CachedHttpServletRequest;
 import com.kopever.framework.web.util.RequestUtil;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;

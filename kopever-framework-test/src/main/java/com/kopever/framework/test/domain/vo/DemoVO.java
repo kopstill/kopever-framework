@@ -3,11 +3,11 @@ package com.kopever.framework.test.domain.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kopever.framework.core.validation.IntEnum;
 import com.kopever.framework.core.validation.ValidationGroup;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
