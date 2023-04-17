@@ -3,7 +3,6 @@ package com.kopever.framework.test.web;
 import com.kopever.framework.api.entity.Response;
 import com.kopever.framework.common.entity.RestCode;
 import com.kopever.framework.common.exception.SystemRuntimeException;
-import com.kopever.framework.common.mapper.Dozer;
 import com.kopever.framework.core.validation.ValidationGroup;
 import com.kopever.framework.redis.Redis;
 import com.kopever.framework.test.common.BusinessCode;
