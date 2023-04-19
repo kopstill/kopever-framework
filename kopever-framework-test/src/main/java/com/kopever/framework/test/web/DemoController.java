@@ -4,7 +4,6 @@ import com.kopever.framework.api.entity.Response;
 import com.kopever.framework.common.entity.RestCode;
 import com.kopever.framework.common.exception.SystemRuntimeException;
 import com.kopever.framework.core.validation.ValidationGroup;
-import com.kopever.framework.redis.Redis;
 import com.kopever.framework.test.common.BusinessCode;
 import com.kopever.framework.test.configuration.properties.DemoProperties;
 import com.kopever.framework.test.domain.vo.DemoVO;
@@ -36,8 +35,6 @@ public class DemoController {
 
     @NonNull
     private DemoProperties demoProperties;
-
-    private final Redis redis;
 
     @GetMapping("/log")
     public Response<Void> log() {
@@ -123,10 +120,10 @@ public class DemoController {
         return Response.success(demoVO);
     }
 
-    @PostMapping("/redis")
-    public Response<Void> redisDemo(@RequestBody RedisDemoVO vo) {
-        redis.set(vo.getRedisKey(), vo.getRedisValue());
-        return Response.success();
-    }
+//    @PostMapping("/redis")
+//    public Response<Void> redisDemo(@RequestBody RedisDemoVO vo) {
+//        redis.set(vo.getRedisKey(), vo.getRedisValue());
+//        return Response.success();
+//    }
 
 }

@@ -31,17 +31,6 @@ spring:
 #      maximum-pool-size: 100
   jackson:
     property-naming-strategy: SNAKE_CASE
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: "PFoxMW0#z0aGlr6VNa%48wBA&&^MTn7r"
-#  data:
-#    mongodb:
-#      uri: mongodb://kopever:3f8fMfDqIUpk0GJVoj5PkZlT@193.112.50.99:27017/kopever
-
-mybatis-plus:
-  global-config:
-    banner: false
 
 logging:
   level:
