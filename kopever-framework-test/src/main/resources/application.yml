@@ -1,11 +1,8 @@
-server:
-  port: 7086
-
 spring:
   profiles:
     active: ${KOPEVER_CONFIG_ENV:dev}
-    application:
-      name: kopever-demo
+  application:
+    name: kopever-demo
   #  cloud:
   #    consul:
   #      host: ${KOPEVER_REGISTRY_ADDRESS:localhost}
@@ -18,17 +15,17 @@ spring:
   #      config:
   #        format: yaml
   #        acl-token: 508ae906-5526-fda0-668c-2a0f115b753a
-#  datasource:
-#    username: kopever
-#    password: $g^xpVxN9!WYAgag45$2Rw$sVyj9vwd^
-#    url: jdbc:mysql://193.112.50.99:3306/kopever?useUnicode=true&characterEncoding=utf8
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    hikari:
-#      connection-timeout: 30000
-#      idle-timeout: 600000
-#      max-lifetime: 1800000
-#      minimumIdle: 10
-#      maximum-pool-size: 100
+  datasource:
+    username: kopever
+    password: '*206n#%*qXAS08td4fV2c1eg8s$IpY&4'
+    url: jdbc:mysql://127.0.0.1:3306/kopever?useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      minimumIdle: 10
+      maximum-pool-size: 100
   jackson:
     property-naming-strategy: SNAKE_CASE
 
