@@ -13,8 +13,9 @@ public class ShedlockScheduler {
     @Scheduled(fixedRate = 10000)
     @SchedulerLock(name = "shedlock_test_scheduler", lockAtLeastFor = "15s")
     public void testShedlockScheduler() {
+        logger.info("before");
         LockAssert.assertLocked();
-        logger.info("shedlock test");
+        logger.info("after");
     }
 
 }
