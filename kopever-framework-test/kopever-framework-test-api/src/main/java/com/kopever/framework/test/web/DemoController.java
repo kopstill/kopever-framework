@@ -7,7 +7,6 @@ import com.kopever.framework.core.validation.ValidationGroup;
 import com.kopever.framework.test.common.BusinessCode;
 import com.kopever.framework.test.configuration.properties.DemoProperties;
 import com.kopever.framework.test.domain.vo.DemoVO;
-import com.kopever.framework.test.domain.vo.RedisDemoVO;
 //import com.kopever.framework.test.service.DemoService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @RefreshScope

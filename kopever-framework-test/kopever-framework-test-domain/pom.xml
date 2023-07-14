@@ -6,15 +6,9 @@
 
     <parent>
         <groupId>com.kopever</groupId>
-        <artifactId>kopever-framework</artifactId>
+        <artifactId>kopever-framework-test</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>kopever-framework-test</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>kopever-framework-test-api</module>
-        <module>kopever-framework-test-domain</module>
-    </modules>
+    <artifactId>kopever-framework-test-domain</artifactId>
 </project>
