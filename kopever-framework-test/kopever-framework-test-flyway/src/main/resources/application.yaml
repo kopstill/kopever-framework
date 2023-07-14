@@ -1,0 +1,10 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: Flyway-Test
+  datasource:
+    username: timeline
+    password: OIHYV4203cGbwkVkd7hTHOg843qpEg
+    url: jdbc:oracle:thin:@//localhost:1521/ORCLPDB1
+    driver-class-name: oracle.jdbc.OracleDriver

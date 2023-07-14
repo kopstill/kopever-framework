@@ -26,11 +26,12 @@
         <!-- kopever framework version -->
         <kopever-framework.version>1.0.0</kopever-framework.version>
         <!-- spring version -->
-        <spring-boot.version>3.0.5</spring-boot.version>
-        <spring-cloud.version>2022.0.2</spring-cloud.version>
-        <spring-data.version>2022.0.4</spring-data.version>
+        <spring-boot.version>3.1.1</spring-boot.version>
+        <spring-cloud.version>2022.0.3</spring-cloud.version>
+        <spring-data.version>2023.0.2</spring-data.version>
         <!-- third party open source libraries -->
-        <shedlock.version>5.2.0</shedlock.version>
+        <shedlock.version>5.5.0</shedlock.version>
+        <flyway.version>9.19.4</flyway.version>
         <!-- maven skip tests -->
         <skipTests>true</skipTests>
     </properties>
@@ -177,6 +178,16 @@
                 <groupId>com.oracle.database.jdbc</groupId>
                 <artifactId>ojdbc8</artifactId>
                 <version>23.2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-database-oracle</artifactId>
+                <version>${flyway.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

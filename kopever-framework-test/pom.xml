@@ -26,5 +26,6 @@
     <modules>
         <module>kopever-framework-test-api</module>
         <module>kopever-framework-test-domain</module>
+        <module>kopever-framework-test-flyway</module>
     </modules>
 </project>
