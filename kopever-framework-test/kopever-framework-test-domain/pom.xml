@@ -11,4 +11,20 @@
     </parent>
 
     <artifactId>kopever-framework-test-domain</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.kopever</groupId>
+            <artifactId>kopever-framework-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>
